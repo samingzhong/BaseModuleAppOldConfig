@@ -15,6 +15,7 @@
 		086B557327D1C08F00E844D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557227D1C08F00E844D0 /* main.m */; };
 		086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */; };
 		086B558027D20F4600E844D0 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557F27D20F4600E844D0 /* SecondViewController.m */; };
+		08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B1527D5EC96007D6DC6 /* TestObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Enlarge.m"; sourceTree = "<group>"; };
 		086B557E27D20F4600E844D0 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		086B557F27D20F4600E844D0 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		08ED1B1427D5EC96007D6DC6 /* TestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
+		08ED1B1527D5EC96007D6DC6 /* TestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,7 @@
 		086B555F27D1C08B00E844D0 /* BaseModuleAppOldConfig */ = {
 			isa = PBXGroup;
 			children = (
+				08ED1B1227D5EC69007D6DC6 /* synthesize */,
 				086B557927D1E78600E844D0 /* CategoryUtils */,
 				086B556027D1C08B00E844D0 /* AppDelegate.h */,
 				086B556127D1C08B00E844D0 /* AppDelegate.m */,
@@ -87,6 +91,15 @@
 				086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */,
 			);
 			path = CategoryUtils;
+			sourceTree = "<group>";
+		};
+		08ED1B1227D5EC69007D6DC6 /* synthesize */ = {
+			isa = PBXGroup;
+			children = (
+				08ED1B1427D5EC96007D6DC6 /* TestObject.h */,
+				08ED1B1527D5EC96007D6DC6 /* TestObject.m */,
+			);
+			path = synthesize;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +176,7 @@
 				086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */,
 				086B556827D1C08B00E844D0 /* MainViewController.m in Sources */,
 				086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */,
+				08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */,
 				086B557327D1C08F00E844D0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
