@@ -8,6 +8,9 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 
+
+#import "TestObject.h"
+
 @interface AppDelegate ()
 
 @end
@@ -25,6 +28,9 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+//    TestObject *obj = TestObject.new;
+//    obj.dynamicObject;
     
     return YES;
 }

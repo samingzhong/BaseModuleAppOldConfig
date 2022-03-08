@@ -17,11 +17,29 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.orangeColor;
     // Do any additional setup after loading the view.
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-        self.navigationController.navigationBar.backgroundColor = UIColor.grayColor;
+
+    NSString *str = [NSString stringWithFormat:@"sunnyxx"];
+    // str是一个autorelease对象，设置一个weak的引用来观察它
+    reference = str;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"");
     });
+    
 }
+
+
+__weak id reference = nil;
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"%@", reference); // Console: sunnyxx
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"%@", reference); // Console: (null)
+}
+
 
 /*
 #pragma mark - Navigation
