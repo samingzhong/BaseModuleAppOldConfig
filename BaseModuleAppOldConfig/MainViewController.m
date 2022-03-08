@@ -10,6 +10,7 @@
 #import "SecondViewController.h"
 #import <Masonry.h>
 #import <ReactiveObjC.h>
+#import "HomeNavigationBar.h"
 
 
 @interface MVView : UIView
@@ -56,15 +57,25 @@ typedef NS_ENUM(NSInteger, MVState) {
 
 @property (nonatomic, assign) MVState state;
 
+@property (nonatomic, strong) HomeNavigationBar *bar;
+
 @end
 
 @implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColor.grayColor;
     
+    HomeNavigationBar *bar = HomeNavigationBar.new;
+    [self.view addSubview:bar];
+    [bar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+    }];
+    self.bar = bar;
     [self.button enLargeWithPadding:UIEdgeInsetsMake(30, 30, 50, 30)];
     
     [self.button addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
@@ -93,6 +104,13 @@ typedef NS_ENUM(NSInteger, MVState) {
     
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    static BOOL r = NO;
+    r ? [self.bar showAll] : [self.bar showMini];
+    r = !r;
+    
+}
+
 
 - (void)buildMainView {
     [self.button removeFromSuperview];
@@ -116,7 +134,7 @@ typedef NS_ENUM(NSInteger, MVState) {
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             if (idx==0) {
                 if (@available(iOS 11.0, *)) {
-                    make.top.mas_equalTo(self.view.mas_safeAreaLayoutGuideTop);
+                    make.top.mas_equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(100);
                 } else {
                     // Fallback on earlier versions
                     make.top.mas_equalTo(self.view.mas_top).offset(20);
@@ -220,9 +238,9 @@ typedef NS_ENUM(NSInteger, MVState) {
     SecondViewController *vc = SecondViewController.new;
     [self.navigationController pushViewController:vc animated:YES];
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.nextResponder touchesBegan:touches withEvent:event];
-}
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    [self.nextResponder touchesBegan:touches withEvent:event];
+//}
 
 
 //- (IBAction)btnDidClick:(id)sender {
