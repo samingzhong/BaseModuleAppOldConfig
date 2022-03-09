@@ -11,6 +11,7 @@
 #import <Masonry.h>
 #import <ReactiveObjC.h>
 #import "HomeNavigationBar.h"
+#import "Person.h"
 
 
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
@@ -78,6 +79,11 @@ typedef NS_ENUM(NSInteger, MVState) {
 
 @property (nonatomic, strong) HomeNavigationBar *bar;
 
+
+@property (nonatomic, assign) Person *person;
+
+@property (nonatomic, copy) void (^block)(void);
+
 @end
 
 @implementation MainViewController
@@ -121,6 +127,21 @@ typedef NS_ENUM(NSInteger, MVState) {
 //        [self buildViewBWithState:MVStateB];
     });
     
+    
+    [self copyTest];
+    
+}
+
+
+-(void)copyTest {
+    Person *p  = [Person new];
+    p.name = @"hello";
+    self.person = p;
+    self.block = ^{
+        NSLog(@"sdf:%@", self.person.name );
+    };
+    
+    NSLog(@"ds");
 }
 
 
@@ -128,6 +149,9 @@ typedef NS_ENUM(NSInteger, MVState) {
     static BOOL r = NO;
     r ? [self.bar showAll] : [self.bar showMini];
     r = !r;
+    
+    NSLog(@"self.name:%@", self.person.name);
+    NSLog(@"sdfaf");
     
 }
 
