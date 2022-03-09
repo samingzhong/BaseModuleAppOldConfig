@@ -7,6 +7,7 @@
 
 #import "HomeNavigationBar.h"
 #import <Masonry.h>
+#import "BarButton.h"
 
 
 @interface HomeNavigationBar ()
@@ -30,6 +31,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        
         _titles =@[@"栏目123123",@"栏目12",@"栏目123",@"栏目1",@"栏目",@"栏目",@"栏目",@"栏目",@"栏目"];
         self.backgroundColor = UIColor.blueColor;
         UIView *topView = UIView.new;
@@ -61,7 +63,7 @@
         [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.top.mas_equalTo(topView.mas_bottom).offset(8);
-            make.height.mas_equalTo(40);
+//            make.height.mas_equalTo(200);
             make.bottom.mas_offset(-2);
         }];
         [_scrollView addSubview:_mainStackView];
@@ -75,6 +77,7 @@
             make.height.equalTo(_scrollView);
 //            make.width.mas_equalTo(1000);
         }];
+//        _scrollView.contentInset = UIEdgeInsetsMake(8, 8, 8, 8);
         [self loadTitles];
     }
     
@@ -96,9 +99,9 @@
 - (void)loadTitles {
     NSMutableArray *btns = @[].mutableCopy;
     [self.titles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *btn = [BarButton new];
         btn.backgroundColor = UIColor.grayColor;
-        [btn setTitle:title forState:UIControlStateNormal];
+//        [btn setTitle:title forState:UIControlStateNormal];
         btn.contentEdgeInsets = UIEdgeInsetsMake(8, 10, 8, 10);
         [btns addObject:btn];
         [self.mainStackView addArrangedSubview:btn];
@@ -110,12 +113,23 @@
 }
 
 - (void)showAll {
+    if ([self.delegate respondsToSelector:@selector(showAll)]) {
+        [self.delegate showAll];
+        return;
+    }
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.bounds = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     }];
 }
 
 - (void)showMini {
+    
+    if ([self.delegate respondsToSelector:@selector(showMini)]) {
+        [self.delegate showAll];
+        return;
+    }
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.bounds = CGRectMake(0, 50, self.bounds.size.width, self.bounds.size.height);
     }];

@@ -13,6 +13,24 @@
 #import "HomeNavigationBar.h"
 
 
+@interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
+
+@end
+
+@implementation UICollectionViewFlowLayoutA
+
+
+
+
+
+- (void)prepareLayout{
+    [super prepareLayout];
+}
+
+@end
+
+
+
 @interface MVView : UIView
 
 @end
@@ -50,9 +68,10 @@ typedef NS_ENUM(NSInteger, MVState) {
     MVStateD = 3,
 };
 
-@interface MainViewController ()
+@interface MainViewController () <BarShowDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *button;
 
+@property (nonatomic, strong) UIView *viewA;
 @property (nonatomic, strong) UIView *viewB;
 
 @property (nonatomic, assign) MVState state;
@@ -104,6 +123,7 @@ typedef NS_ENUM(NSInteger, MVState) {
     
 }
 
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     static BOOL r = NO;
     r ? [self.bar showAll] : [self.bar showMini];
@@ -128,16 +148,22 @@ typedef NS_ENUM(NSInteger, MVState) {
         if (i == 1) {
             self.viewB = view;
         }
+        
+        if (i == 0) {
+            self.viewA = view;
+        }
     }
     
     [subViews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL * _Nonnull stop) {
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             if (idx==0) {
                 if (@available(iOS 11.0, *)) {
-                    make.top.mas_equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(100);
+                    make.top.mas_equalTo(self.bar.mas_bottom).offset(8);
+                    make.height.mas_equalTo(200);
+
                 } else {
                     // Fallback on earlier versions
-                    make.top.mas_equalTo(self.view.mas_top).offset(20);
+                    make.top.mas_equalTo(self.bar.mas_bottom).offset(8);
                 }
             } else {
                 make.top.mas_equalTo((subViews[idx-1]).mas_bottom).offset(8);
@@ -146,6 +172,45 @@ typedef NS_ENUM(NSInteger, MVState) {
 //            make.height.mas_equalTo(50+arc4random()%100);
         }];
     }];
+    
+    [self buildViewA];
+}
+
+
+- (void)buildViewA {
+    UICollectionViewFlowLayout *layout = UICollectionViewFlowLayout.new;
+    layout.itemSize = CGSizeMake(50, 50);
+    UICollectionView *cv = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    cv.backgroundColor = UIColor.greenColor;
+    [self.viewA addSubview:cv];
+    [cv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(8, 8, 8, 8));
+    }];
+    cv.dataSource = self;
+    cv.delegate = self;
+    [cv registerClass:UICollectionViewCell.class forCellWithReuseIdentifier:@"cell"];
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(collectionView.bounds.size.width/2-10, 50);
+}
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 20;
+}
+
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+//    return 2;
+//}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    cell.backgroundColor = UIColor.grayColor;
+    
+    return cell;
 }
 
 

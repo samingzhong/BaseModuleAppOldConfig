@@ -7,9 +7,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BarShowDelegate <NSObject>
+
+@optional
+- (void)showAll;
+- (void)showMini;
+
+@end
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeNavigationBar : UIView
+
+@property (nonatomic, weak) id <BarShowDelegate> delegate;
 
 @property (nonatomic, copy) NSArray *titles;
 
