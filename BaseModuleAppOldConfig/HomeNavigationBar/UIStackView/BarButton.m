@@ -10,6 +10,7 @@
 
 @interface BarButton ()
 
+@property (nonatomic, strong) UILabel *myTitleLabel;
 @property (nonatomic, strong) UIImageView *bottomImageView;
 
 @end
@@ -32,14 +33,14 @@
         UILabel *label = UILabel.new;
         label.backgroundColor = UIColor.greenColor;
         [self addSubview:label];
-        
+        self.myTitleLabel = label;
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_greaterThanOrEqualTo(10);
-            make.width.mas_lessThanOrEqualTo(100);
+//            make.width.mas_greaterThanOrEqualTo(10);
+//            make.width.mas_lessThanOrEqualTo(100);
 
-            make.left.mas_greaterThanOrEqualTo(8);
+            make.left.mas_equalTo(8);
             make.height.mas_equalTo(40);
-            make.right.mas_greaterThanOrEqualTo(-8);
+            make.right.mas_equalTo(-8);
             make.centerX.mas_equalTo(0);
             make.top.mas_equalTo(8);
         }];
@@ -48,7 +49,7 @@
         self.bottomImageView.backgroundColor = UIColor.purpleColor;
         [self addSubview:self.bottomImageView];
         [self.bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50, arc4random()%2?50:0));
+            make.size.mas_equalTo(CGSizeMake(arc4random()%30+20, arc4random()%30+20));
             make.top.mas_equalTo(label.mas_bottom).offset(10);
             make.centerX.mas_equalTo(0);
             make.bottom.mas_equalTo(self).offset(-8);
@@ -60,6 +61,11 @@
     }
     
     return self;
+}
+
+- (void)setTitle:(NSString *)title {
+    _title = [title copy];
+    self.myTitleLabel.text = title;
 }
 
 

@@ -11,8 +11,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Person : NSObject
 
-@property (nonatomic, copy) NSString *name;
+//@property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger age;
+@property (nonatomic, assign) BOOL man;
+//@property (nonatomic, assign) float f;
+//@property (nonatomic, assign) float f1;
+//@property (nonatomic, assign) BOOL man1;
+
+//@property (nonatomic, assign) double d;
+
+- (void)mainMethod;
+
++ (void)classMethod;
+
+@end
+
+
+
+@interface XXPerson : Person
 
 @end
 

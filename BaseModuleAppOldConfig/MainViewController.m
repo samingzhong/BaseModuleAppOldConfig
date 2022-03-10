@@ -12,7 +12,8 @@
 #import <ReactiveObjC.h>
 #import "HomeNavigationBar.h"
 #import "Person.h"
-
+#import <malloc/malloc.h>
+#import <objc/runtime.h>
 
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
@@ -84,9 +85,17 @@ typedef NS_ENUM(NSInteger, MVState) {
 
 @property (nonatomic, copy) void (^block)(void);
 
+@property (nonatomic, weak) NSObject *zombieObj;
+
 @end
 
 @implementation MainViewController
+
+extern uintptr_t _objc_rootRetainCount(id obj);
+extern id _objc_rootRetain(id obj);
+extern void _objc_rootRelease(id obj);
+extern id _objc_rootAutorelease(id obj);
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -128,18 +137,24 @@ typedef NS_ENUM(NSInteger, MVState) {
     });
     
     
+//    [self zombieTest];
+    [self zombieTest];
+    
     [self copyTest];
+    [self objectMemoryLayoutAlignTest];
     
 }
 
 
 -(void)copyTest {
-    Person *p  = [Person new];
-    p.name = @"hello";
-    self.person = p;
-    self.block = ^{
-        NSLog(@"sdf:%@", self.person.name );
-    };
+    Person *p  = [XXPerson new];
+//    p.name = @"hello";
+//    self.person = p;
+//    self.block = ^{
+//        NSLog(@"sdf:%@", self.person.name );
+//    };
+    
+    [p mainMethod];
     
     NSLog(@"ds");
 }
@@ -150,9 +165,44 @@ typedef NS_ENUM(NSInteger, MVState) {
     r ? [self.bar showAll] : [self.bar showMini];
     r = !r;
     
-    NSLog(@"self.name:%@", self.person.name);
+//    NSLog(@"self.name:%@", self.person.name);
     NSLog(@"sdfaf");
     
+}
+
+
+- (void)zombieTest {
+    NSObject *obj = NSObject.new;
+    self.zombieObj = obj;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        id obj = self.zombieObj;
+        [obj description];
+    });
+}
+
+
+- (void)objectMemoryLayoutAlignTest {
+    Person *obj = [[Person alloc] init];
+    
+    for (int i=0; i<1000; i++) {
+        _objc_rootRetain(obj);
+        _objc_rootRetainCount(obj);
+    }
+    
+//    obj.name = [NSString stringWithFormat:@"A"];
+    obj.age=1;
+    obj.man=YES;
+//    obj.f = 3.f;
+//    obj.f1 = 4.f;
+//    obj.man1=YES;
+
+//    obj.d = 5.f;
+    
+    NSLog(@"1sizeof(obj):%@\nsizeof(NSInterger:%@),sizeof(BOOL:%@)", @(malloc_size((__bridge const void *)(obj))), @(sizeof(typeof(NSInteger))), @(sizeof(typeof(BOOL))));
+    int size = class_getInstanceSize([Person class]);
+    NSLog(@"sizeof(obj:%d", size);
+    NSLog(@"asf");
 }
 
 

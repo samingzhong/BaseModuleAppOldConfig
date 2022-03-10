@@ -19,6 +19,7 @@
 		08ED1B3F27D740C5007D6DC6 /* HomeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B3E27D740C5007D6DC6 /* HomeNavigationBar.m */; };
 		08ED1B4327D75B73007D6DC6 /* BarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4227D75B73007D6DC6 /* BarButton.m */; };
 		08ED1B4727D89634007D6DC6 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4627D89634007D6DC6 /* Person.m */; };
+		08ED1B7C27D9D0D0007D6DC6 /* Person+A.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */; };
 		75367DF00005D5F159164EA4 /* Pods_BaseModuleAppOldConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,9 @@
 		08ED1B4227D75B73007D6DC6 /* BarButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarButton.m; sourceTree = "<group>"; };
 		08ED1B4527D89634007D6DC6 /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		08ED1B4627D89634007D6DC6 /* Person.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		08ED1B7A27D9D0D0007D6DC6 /* Person+A.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+A.h"; sourceTree = "<group>"; };
+		08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Person+A.m"; sourceTree = "<group>"; };
+		08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+PersonExtension.h"; sourceTree = "<group>"; };
 		5795A7472F3C5E8CA9D6BB38 /* Pods-BaseModuleAppOldConfig.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.release.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.release.xcconfig"; sourceTree = "<group>"; };
 		AE4A3E9CC122F3D502A72DBC /* Pods-BaseModuleAppOldConfig.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.debug.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.debug.xcconfig"; sourceTree = "<group>"; };
 		F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseModuleAppOldConfig.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +93,6 @@
 				086B556027D1C08B00E844D0 /* AppDelegate.h */,
 				08ED1B3C27D740A3007D6DC6 /* HomeNavigationBar */,
 				086B556127D1C08B00E844D0 /* AppDelegate.m */,
-				08ED1B4027D75B4B007D6DC6 /* UIStackView */,
 				086B556627D1C08B00E844D0 /* MainViewController.h */,
 				086B556727D1C08B00E844D0 /* MainViewController.m */,
 				086B557E27D20F4600E844D0 /* SecondViewController.h */,
@@ -126,6 +129,7 @@
 			children = (
 				08ED1B3D27D740C5007D6DC6 /* HomeNavigationBar.h */,
 				08ED1B3E27D740C5007D6DC6 /* HomeNavigationBar.m */,
+				08ED1B4027D75B4B007D6DC6 /* UIStackView */,
 			);
 			path = HomeNavigationBar;
 			sourceTree = "<group>";
@@ -144,6 +148,9 @@
 			children = (
 				08ED1B4527D89634007D6DC6 /* Person.h */,
 				08ED1B4627D89634007D6DC6 /* Person.m */,
+				08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */,
+				08ED1B7A27D9D0D0007D6DC6 /* Person+A.h */,
+				08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -287,6 +294,7 @@
 				08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */,
 				08ED1B4727D89634007D6DC6 /* Person.m in Sources */,
 				086B557327D1C08F00E844D0 /* main.m in Sources */,
+				08ED1B7C27D9D0D0007D6DC6 /* Person+A.m in Sources */,
 				08ED1B4327D75B73007D6DC6 /* BarButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
