@@ -20,6 +20,7 @@
 		08ED1B4327D75B73007D6DC6 /* BarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4227D75B73007D6DC6 /* BarButton.m */; };
 		08ED1B4727D89634007D6DC6 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4627D89634007D6DC6 /* Person.m */; };
 		08ED1B7C27D9D0D0007D6DC6 /* Person+A.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */; };
+		08ED1B8027DAF958007D6DC6 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7F27DAF957007D6DC6 /* fishhook.c */; };
 		75367DF00005D5F159164EA4 /* Pods_BaseModuleAppOldConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,8 @@
 		08ED1B7A27D9D0D0007D6DC6 /* Person+A.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+A.h"; sourceTree = "<group>"; };
 		08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Person+A.m"; sourceTree = "<group>"; };
 		08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+PersonExtension.h"; sourceTree = "<group>"; };
+		08ED1B7E27DAF957007D6DC6 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = ../../../Documents/myApps/fishhook/fishhook.h; sourceTree = "<group>"; };
+		08ED1B7F27DAF957007D6DC6 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = ../../../Documents/myApps/fishhook/fishhook.c; sourceTree = "<group>"; };
 		5795A7472F3C5E8CA9D6BB38 /* Pods-BaseModuleAppOldConfig.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.release.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.release.xcconfig"; sourceTree = "<group>"; };
 		AE4A3E9CC122F3D502A72DBC /* Pods-BaseModuleAppOldConfig.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.debug.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.debug.xcconfig"; sourceTree = "<group>"; };
 		F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseModuleAppOldConfig.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +105,8 @@
 				086B556C27D1C08F00E844D0 /* Assets.xcassets */,
 				086B556E27D1C08F00E844D0 /* LaunchScreen.storyboard */,
 				086B557127D1C08F00E844D0 /* Info.plist */,
+				08ED1B7F27DAF957007D6DC6 /* fishhook.c */,
+				08ED1B7E27DAF957007D6DC6 /* fishhook.h */,
 				086B557227D1C08F00E844D0 /* main.m */,
 			);
 			path = BaseModuleAppOldConfig;
@@ -290,6 +295,7 @@
 				086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */,
 				086B556827D1C08B00E844D0 /* MainViewController.m in Sources */,
 				086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */,
+				08ED1B8027DAF958007D6DC6 /* fishhook.c in Sources */,
 				08ED1B3F27D740C5007D6DC6 /* HomeNavigationBar.m in Sources */,
 				08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */,
 				08ED1B4727D89634007D6DC6 /* Person.m in Sources */,

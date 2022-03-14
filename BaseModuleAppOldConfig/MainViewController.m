@@ -15,6 +15,8 @@
 #import <malloc/malloc.h>
 #import <objc/runtime.h>
 
+#import "Person+A.h"
+
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
 @end
@@ -138,11 +140,14 @@ extern id _objc_rootAutorelease(id obj);
     
     
 //    [self zombieTest];
-    [self zombieTest];
+//    [self zombieTest];
+    
+    [self gcdThreadCooTest];
     
     [self copyTest];
     [self objectMemoryLayoutAlignTest];
     
+    [self addPropertyToCategoryTest];
 }
 
 
@@ -181,6 +186,27 @@ extern id _objc_rootAutorelease(id obj);
     });
 }
 
+- (void)gcdThreadCooTest {
+    dispatch_queue_t queue = dispatch_queue_create("cc.imguiqing", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_async(queue, ^{
+        NSLog(@"task 1 on %@",[NSThread currentThread]);
+        sleep(arc4random()%5);
+        NSLog(@"task 1 on %@ done!",[NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"task 2 on %@",[NSThread currentThread]);
+        sleep(arc4random()%5);
+        NSLog(@"task 2 on %@ done!",[NSThread currentThread]);
+
+    });
+    dispatch_barrier_async(queue, ^{
+        NSLog(@"barrier ==========");
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"task 3 on %@",[NSThread currentThread]);
+    });
+}
+
 
 - (void)objectMemoryLayoutAlignTest {
     Person *obj = [[Person alloc] init];
@@ -203,6 +229,13 @@ extern id _objc_rootAutorelease(id obj);
     int size = class_getInstanceSize([Person class]);
     NSLog(@"sizeof(obj:%d", size);
     NSLog(@"asf");
+}
+
+
+#pragma mark - 类别+属性
+- (void)addPropertyToCategoryTest {
+    Person *p = Person.new;
+    p.categoryProperty = self;
 }
 
 

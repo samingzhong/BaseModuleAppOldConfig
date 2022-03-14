@@ -8,8 +8,22 @@
 #import "Person+A.h"
 #import "Person+PersonExtension.h"
 
+@interface Person (A)
+
+
+@end
 
 @implementation Person (A)
+
+static const char key;
+
+- (void)setCategoryProperty:(NSObject *)categoryProperty {
+    
+}
+
+- (NSObject *)categoryProperty {
+    return nil;
+}
 
 
 @end
