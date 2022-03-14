@@ -32,7 +32,7 @@
     self = [super init];
     if (self) {
         
-        _titles =@[@"栏目123123",@"栏目12",@"栏目123",@"栏目1",@"栏目",@"栏目",@"栏目",@"栏目",@"栏目"];
+        _titles =@[@"栏目123123",@"栏目12",@"栏目123",@"栏目1",@"栏目",@"栏目",@"栏目",@"栏目",@"栏目",@"栏目12",@"栏目123",@"栏目1",@"栏目",@"栏目",@"栏目",@"栏目",@"栏目"];
         self.backgroundColor = UIColor.blueColor;
         UIView *topView = UIView.new;
         topView.backgroundColor = UIColor.redColor;
@@ -99,10 +99,11 @@
 - (void)loadTitles {
     NSMutableArray *btns = @[].mutableCopy;
     [self.titles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *btn = [BarButton new];
+        BarButton *btn = [BarButton new];
         btn.backgroundColor = UIColor.grayColor;
 //        [btn setTitle:title forState:UIControlStateNormal];
         btn.contentEdgeInsets = UIEdgeInsetsMake(8, 10, 8, 10);
+        btn.title = title;
         [btns addObject:btn];
         [self.mainStackView addArrangedSubview:btn];
     }];
