@@ -15,13 +15,14 @@
 		086B557327D1C08F00E844D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557227D1C08F00E844D0 /* main.m */; };
 		086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */; };
 		086B558027D20F4600E844D0 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557F27D20F4600E844D0 /* SecondViewController.m */; };
+		08D0209427E02E7000281009 /* NSMutableURLRequest+RangeDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D0209327E02E7000281009 /* NSMutableURLRequest+RangeDownload.m */; };
+		08D0209727E033ED00281009 /* DownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D0209627E033ED00281009 /* DownLoader.m */; };
 		08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B1527D5EC96007D6DC6 /* TestObject.m */; };
 		08ED1B3F27D740C5007D6DC6 /* HomeNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B3E27D740C5007D6DC6 /* HomeNavigationBar.m */; };
 		08ED1B4327D75B73007D6DC6 /* BarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4227D75B73007D6DC6 /* BarButton.m */; };
 		08ED1B4727D89634007D6DC6 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4627D89634007D6DC6 /* Person.m */; };
 		08ED1B7C27D9D0D0007D6DC6 /* Person+A.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */; };
 		08ED1B8027DAF958007D6DC6 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7F27DAF957007D6DC6 /* fishhook.c */; };
-		08ED1B7C27D9D0D0007D6DC6 /* Person+A.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */; };
 		75367DF00005D5F159164EA4 /* Pods_BaseModuleAppOldConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,10 @@
 		086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Enlarge.m"; sourceTree = "<group>"; };
 		086B557E27D20F4600E844D0 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		086B557F27D20F4600E844D0 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		08D0209227E02E7000281009 /* NSMutableURLRequest+RangeDownload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+RangeDownload.h"; sourceTree = "<group>"; };
+		08D0209327E02E7000281009 /* NSMutableURLRequest+RangeDownload.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+RangeDownload.m"; sourceTree = "<group>"; };
+		08D0209527E033ED00281009 /* DownLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownLoader.h; sourceTree = "<group>"; };
+		08D0209627E033ED00281009 /* DownLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoader.m; sourceTree = "<group>"; };
 		08ED1B1427D5EC96007D6DC6 /* TestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
 		08ED1B1527D5EC96007D6DC6 /* TestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
 		08ED1B3D27D740C5007D6DC6 /* HomeNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeNavigationBar.h; sourceTree = "<group>"; };
@@ -53,9 +58,6 @@
 		08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+PersonExtension.h"; sourceTree = "<group>"; };
 		08ED1B7E27DAF957007D6DC6 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = ../../../Documents/myApps/fishhook/fishhook.h; sourceTree = "<group>"; };
 		08ED1B7F27DAF957007D6DC6 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = ../../../Documents/myApps/fishhook/fishhook.c; sourceTree = "<group>"; };
-		08ED1B7A27D9D0D0007D6DC6 /* Person+A.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+A.h"; sourceTree = "<group>"; };
-		08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Person+A.m"; sourceTree = "<group>"; };
-		08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+PersonExtension.h"; sourceTree = "<group>"; };
 		5795A7472F3C5E8CA9D6BB38 /* Pods-BaseModuleAppOldConfig.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.release.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.release.xcconfig"; sourceTree = "<group>"; };
 		AE4A3E9CC122F3D502A72DBC /* Pods-BaseModuleAppOldConfig.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.debug.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.debug.xcconfig"; sourceTree = "<group>"; };
 		F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseModuleAppOldConfig.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,10 @@
 				08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */,
 				08ED1B7A27D9D0D0007D6DC6 /* Person+A.h */,
 				08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */,
+				08D0209227E02E7000281009 /* NSMutableURLRequest+RangeDownload.h */,
+				08D0209327E02E7000281009 /* NSMutableURLRequest+RangeDownload.m */,
+				08D0209527E033ED00281009 /* DownLoader.h */,
+				08D0209627E033ED00281009 /* DownLoader.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -296,9 +302,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				086B558027D20F4600E844D0 /* SecondViewController.m in Sources */,
+				08D0209727E033ED00281009 /* DownLoader.m in Sources */,
 				086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */,
 				086B556827D1C08B00E844D0 /* MainViewController.m in Sources */,
 				086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */,
+				08D0209427E02E7000281009 /* NSMutableURLRequest+RangeDownload.m in Sources */,
 				08ED1B8027DAF958007D6DC6 /* fishhook.c in Sources */,
 				08ED1B3F27D740C5007D6DC6 /* HomeNavigationBar.m in Sources */,
 				08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */,

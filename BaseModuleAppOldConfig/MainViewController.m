@@ -17,6 +17,8 @@
 
 #import "Person+A.h"
 
+#import "DownLoader.h"
+
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
 @end
@@ -101,6 +103,10 @@ extern id _objc_rootAutorelease(id obj);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [DownLoader downloadWithUrl:@"https://vd3.bdstatic.com/mda-ncdf5p17j4ztsdaw/sc/cae_h264_delogo/1647263253838817803/mda-ncdf5p17j4ztsdaw.mp4?v_from_s=hkapp-haokan-hnb&auth_key=1647327438-0-0-5e27273cca0976df226d33c8f764990c&bcevod_channel=searchbox_feed&cd=0&pd=1&pt=3&logid=1637974093&vid=15318298559196487317&abtest=100815_2-17451_1&klogid=1637974093" block:nil];
+//    [DownLoader downloadWithUrl:@"https://t7.baidu.com/it/u=2295973985,242574375&fm=193&f=GIF" block:nil];
+    
     
     
     // Do any additional setup after loading the view.
