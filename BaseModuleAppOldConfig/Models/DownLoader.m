@@ -12,7 +12,7 @@
 
 
 
-@interface DownLoaderOperation : NSOperation
+@interface DownLoaderOperation : NSOperation <NSURLSessionDataDelegate>
 
 @property (assign, nonatomic, getter = isExecuting) BOOL executing;
 @property (assign, nonatomic, getter = isFinished) BOOL finished;
@@ -21,7 +21,6 @@
 
 @property (nonatomic, assign) NSRange range;
 
-- (void)start;
 
 @end
 
@@ -71,16 +70,29 @@
     request.contentRange = range;
     request.HTTPMethod = @"GET";
 //    sleep(arc4random()%20);
-    NSURLSessionDataTask *task = [NSURLSession.sharedSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        UIImage *image = [UIImage imageWithData:data];
-        NSLog(@"image:%@",image);
-        NSFileHandle *fh = [NSFileHandle fileHandleForWritingAtPath:[self anrDirectory]];
-        [fh seekToFileOffset:request.contentRange.location];
-        [fh writeData:data];
-        NSLog(@"hello");
-        [self done];
-    }];
+    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:NSOperationQueue.new] dataTaskWithRequest:request];
+    
+    
     [task resume];
+    
+//    UIImage *image = [UIImage imageWithData:data];
+//    NSLog(@"image:%@",image);
+//    NSFileHandle *fh = [NSFileHandle fileHandleForWritingAtPath:[self anrDirectory]];
+//    [fh seekToFileOffset:request.contentRange.location];
+//    [fh writeData:data];
+//    NSLog(@"hello");
+//    [self done];
+}
+
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+    NSLog(@"didReceiveData");
+}
+
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
+    NSLog(@"didReceiveResponse completionHandler");
+    
 }
 
 @end
@@ -90,7 +102,7 @@
 
 @interface DownLoader ()
 
-@property (nonatomic, assign) NSInteger totolSize;
+@property (nonatomic, assign) NSInteger totalSize;
 
 @property (nonatomic, copy) NSString *url;
 
@@ -138,16 +150,10 @@
             operation.range = range;
             if (range.location == 0) {
                 [self sharedInstance].firstOperation = operation;
-                [[self sharedInstance].downloadQueue addOperation:operation];
             }
+            [[self sharedInstance].downloadQueue addOperation:operation];
         }
         
-    }];
-
-    
-    DownLoaderOperation *o = [self sharedInstance].firstOperation;
-    [RACObserve(o, finished) subscribeNext:^(id  _Nullable x) {
-        NSLog(@"first task finish");
     }];
     
     
@@ -205,7 +211,7 @@
         if (!error) {
             NSHTTPURLResponse *httpRes = (NSHTTPURLResponse *)response;
             NSInteger totolSize = ((NSNumber *)httpRes.allHeaderFields[@"Content-Length"]).integerValue;
-            [self sharedInstance].totolSize = totolSize;
+            [self sharedInstance].totalSize = totolSize;
             NSInteger counts = [self unitSizeWithTotolSize:totolSize];
             long unitSize = totolSize/counts;
             NSArray *array = [self splitTotalSize:totolSize withUnit:unitSize];
