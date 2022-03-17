@@ -6,12 +6,23 @@
 //
 
 #import "SecondViewController.h"
+#import "objc-retainCount/NSObject+GACRetainCount.h"
+
+
+void myFunctionWithBlock(dispatch_block_t block) {
+    if (block) {
+        block();
+    }
+}
+
+
 
 @interface SecondViewController ()
 
 @end
 
 @implementation SecondViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,10 +33,36 @@
     // str是一个autorelease对象，设置一个weak的引用来观察它
     reference = str;
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog(@"");
+//    __weak __typeof(self)weakSelf = self;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        __strong __typeof(weakSelf) strongSelf = weakSelf;
+//        NSLog(@"retainCount:%ld", [strongSelf rq_retainCount]);
+//        NSLog(@"self:%@", strongSelf);
+//    });
+//
+//
+//
+//
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        __strong __typeof(weakSelf) strongSelf = weakSelf;
+//
+//        NSLog(@"self:%@", strongSelf);
+//    });
+    
+    myFunctionWithBlock(^{
+        NSLog(@"self :%@", self);
     });
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"retainCount:%ld", [self rq_retainCount]);
+        [self.navigationController popViewControllerAnimated:YES];
+    });
+    
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc ");
 }
 
 

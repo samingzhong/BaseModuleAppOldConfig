@@ -133,13 +133,13 @@ extern id _objc_rootAutorelease(id obj);
     }];
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.state = MVStateA;
 //        [self buildViewBWithState:MVStateA];
     });
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.state = MVStateB;
 //        [self buildViewBWithState:MVStateB];
     });
@@ -406,6 +406,13 @@ extern id _objc_rootAutorelease(id obj);
             make.bottom.mas_equalTo(-2);
         }];
         
+        UIButton *btn = UIButton.new;
+        [btn setTitle:@"push to b" forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+        [leftView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.center.mas_equalTo(0);
+        }];
     }
     
     return view;

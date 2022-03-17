@@ -8,5 +8,5 @@ target 'BaseModuleAppOldConfig' do
   # Pods for BaseModuleAppOldConfig
   pod 'Masonry'
   pod 'ReactiveObjC'
-
+  pod 'JSPatch'
 end

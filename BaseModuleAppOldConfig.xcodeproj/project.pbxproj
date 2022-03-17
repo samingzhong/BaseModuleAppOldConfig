@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */; };
 		086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556127D1C08B00E844D0 /* AppDelegate.m */; };
 		086B556827D1C08B00E844D0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556727D1C08B00E844D0 /* MainViewController.m */; };
 		086B556B27D1C08B00E844D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086B556927D1C08B00E844D0 /* Main.storyboard */; };
@@ -27,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GACRetainCount.m"; sourceTree = "<group>"; };
+		0869E36027E1B3360067E880 /* NSObject+GACRetainCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GACRetainCount.h"; sourceTree = "<group>"; };
 		086B555D27D1C08B00E844D0 /* BaseModuleAppOldConfig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseModuleAppOldConfig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		086B556027D1C08B00E844D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		086B556127D1C08B00E844D0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0869E35E27E1B3360067E880 /* objc-retainCount */ = {
+			isa = PBXGroup;
+			children = (
+				0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */,
+				0869E36027E1B3360067E880 /* NSObject+GACRetainCount.h */,
+			);
+			path = "objc-retainCount";
+			sourceTree = "<group>";
+		};
 		086B555427D1C08B00E844D0 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +108,7 @@
 		086B555F27D1C08B00E844D0 /* BaseModuleAppOldConfig */ = {
 			isa = PBXGroup;
 			children = (
+				0869E35E27E1B3360067E880 /* objc-retainCount */,
 				08ED1B4427D89623007D6DC6 /* Models */,
 				08ED1B1227D5EC69007D6DC6 /* synthesize */,
 				086B557927D1E78600E844D0 /* CategoryUtils */,
@@ -301,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */,
 				086B558027D20F4600E844D0 /* SecondViewController.m in Sources */,
 				08D0209727E033ED00281009 /* DownLoader.m in Sources */,
 				086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */,
