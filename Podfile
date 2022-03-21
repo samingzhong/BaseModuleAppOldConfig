@@ -9,4 +9,5 @@ target 'BaseModuleAppOldConfig' do
   pod 'Masonry'
   pod 'ReactiveObjC'
   pod 'JSPatch'
+  pod 'fishhook'
 end
