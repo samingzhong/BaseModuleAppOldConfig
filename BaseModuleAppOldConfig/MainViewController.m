@@ -506,4 +506,18 @@ extern id _objc_rootAutorelease(id obj);
 //}
 
 
+
+@end
+
+
+@interface MainViewController (Test)
+
+@end
+
+@implementation MainViewController (Test)
+
+//- (void)viewDidLoad {
+//    NSLog(@"hello ");
+//}
+
 @end
