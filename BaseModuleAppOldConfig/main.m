@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
-#import "fishhook.h"
+#import <fishhook.h>
 
 static int (*orig_close)(int);
 static int (*orig_open)(const char *, int, ...);
