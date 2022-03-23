@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */; };
+		0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0869E36427E96EFE0067E880 /* WeakProxy.m */; };
 		086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556127D1C08B00E844D0 /* AppDelegate.m */; };
 		086B556827D1C08B00E844D0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556727D1C08B00E844D0 /* MainViewController.m */; };
 		086B556B27D1C08B00E844D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086B556927D1C08B00E844D0 /* Main.storyboard */; };
@@ -23,13 +24,15 @@
 		08ED1B4327D75B73007D6DC6 /* BarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4227D75B73007D6DC6 /* BarButton.m */; };
 		08ED1B4727D89634007D6DC6 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B4627D89634007D6DC6 /* Person.m */; };
 		08ED1B7C27D9D0D0007D6DC6 /* Person+A.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */; };
-		08ED1B8027DAF958007D6DC6 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 08ED1B7F27DAF957007D6DC6 /* fishhook.c */; };
 		75367DF00005D5F159164EA4 /* Pods_BaseModuleAppOldConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GACRetainCount.m"; sourceTree = "<group>"; };
 		0869E36027E1B3360067E880 /* NSObject+GACRetainCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GACRetainCount.h"; sourceTree = "<group>"; };
+		0869E36327E96EFE0067E880 /* WeakProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakProxy.h; sourceTree = "<group>"; };
+		0869E36427E96EFE0067E880 /* WeakProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakProxy.m; sourceTree = "<group>"; };
+		0869E36827EB17F50067E880 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		086B555D27D1C08B00E844D0 /* BaseModuleAppOldConfig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseModuleAppOldConfig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		086B556027D1C08B00E844D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		086B556127D1C08B00E844D0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -59,8 +62,6 @@
 		08ED1B7A27D9D0D0007D6DC6 /* Person+A.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+A.h"; sourceTree = "<group>"; };
 		08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Person+A.m"; sourceTree = "<group>"; };
 		08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+PersonExtension.h"; sourceTree = "<group>"; };
-		08ED1B7E27DAF957007D6DC6 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = ../../../Documents/myApps/fishhook/fishhook.h; sourceTree = "<group>"; };
-		08ED1B7F27DAF957007D6DC6 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = ../../../Documents/myApps/fishhook/fishhook.c; sourceTree = "<group>"; };
 		5795A7472F3C5E8CA9D6BB38 /* Pods-BaseModuleAppOldConfig.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.release.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.release.xcconfig"; sourceTree = "<group>"; };
 		AE4A3E9CC122F3D502A72DBC /* Pods-BaseModuleAppOldConfig.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseModuleAppOldConfig.debug.xcconfig"; path = "Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleAppOldConfig.debug.xcconfig"; sourceTree = "<group>"; };
 		F646ED55672AC8E1251E7550 /* Pods_BaseModuleAppOldConfig.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseModuleAppOldConfig.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +88,29 @@
 			path = "objc-retainCount";
 			sourceTree = "<group>";
 		};
+		0869E36227E96E830067E880 /* WeakProxy */ = {
+			isa = PBXGroup;
+			children = (
+				0869E36327E96EFE0067E880 /* WeakProxy.h */,
+				0869E36427E96EFE0067E880 /* WeakProxy.m */,
+			);
+			path = WeakProxy;
+			sourceTree = "<group>";
+		};
+		0869E36627EB173F0067E880 /* C hook */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "C hook";
+			sourceTree = "<group>";
+		};
+		0869E36727EB174E0067E880 /* OC hook */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "OC hook";
+			sourceTree = "<group>";
+		};
 		086B555427D1C08B00E844D0 = {
 			isa = PBXGroup;
 			children = (
@@ -108,14 +132,17 @@
 		086B555F27D1C08B00E844D0 /* BaseModuleAppOldConfig */ = {
 			isa = PBXGroup;
 			children = (
+				0869E36727EB174E0067E880 /* OC hook */,
+				0869E36627EB173F0067E880 /* C hook */,
 				0869E35E27E1B3360067E880 /* objc-retainCount */,
 				08ED1B4427D89623007D6DC6 /* Models */,
 				08ED1B1227D5EC69007D6DC6 /* synthesize */,
 				086B557927D1E78600E844D0 /* CategoryUtils */,
-				086B556027D1C08B00E844D0 /* AppDelegate.h */,
 				08ED1B3C27D740A3007D6DC6 /* HomeNavigationBar */,
-				086B556127D1C08B00E844D0 /* AppDelegate.m */,
+				0869E36227E96E830067E880 /* WeakProxy */,
 				086B556627D1C08B00E844D0 /* MainViewController.h */,
+				086B556027D1C08B00E844D0 /* AppDelegate.h */,
+				086B556127D1C08B00E844D0 /* AppDelegate.m */,
 				086B556727D1C08B00E844D0 /* MainViewController.m */,
 				086B557E27D20F4600E844D0 /* SecondViewController.h */,
 				086B557F27D20F4600E844D0 /* SecondViewController.m */,
@@ -123,9 +150,8 @@
 				086B556C27D1C08F00E844D0 /* Assets.xcassets */,
 				086B556E27D1C08F00E844D0 /* LaunchScreen.storyboard */,
 				086B557127D1C08F00E844D0 /* Info.plist */,
-				08ED1B7F27DAF957007D6DC6 /* fishhook.c */,
-				08ED1B7E27DAF957007D6DC6 /* fishhook.h */,
 				086B557227D1C08F00E844D0 /* main.m */,
+				0869E36827EB17F50067E880 /* PrefixHeader.pch */,
 			);
 			path = BaseModuleAppOldConfig;
 			sourceTree = "<group>";
@@ -314,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */,
 				0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */,
 				086B558027D20F4600E844D0 /* SecondViewController.m in Sources */,
 				08D0209727E033ED00281009 /* DownLoader.m in Sources */,
@@ -321,7 +348,6 @@
 				086B556827D1C08B00E844D0 /* MainViewController.m in Sources */,
 				086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */,
 				08D0209427E02E7000281009 /* NSMutableURLRequest+RangeDownload.m in Sources */,
-				08ED1B8027DAF958007D6DC6 /* fishhook.c in Sources */,
 				08ED1B3F27D740C5007D6DC6 /* HomeNavigationBar.m in Sources */,
 				08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */,
 				08ED1B4727D89634007D6DC6 /* Person.m in Sources */,
@@ -473,7 +499,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J3P7V5TL23;
+				DEVELOPMENT_TEAM = 4Z2877VT79;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BaseModuleAppOldConfig/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -502,7 +528,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J3P7V5TL23;
+				DEVELOPMENT_TEAM = 4Z2877VT79;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BaseModuleAppOldConfig/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

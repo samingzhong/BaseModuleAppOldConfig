@@ -91,6 +91,8 @@ typedef NS_ENUM(NSInteger, MVState) {
 
 @property (nonatomic, assign) NSObject *zombieObj;
 
+
+@property (nonatomic, strong) NSThread *myWorkThread;
 @end
 
 @implementation MainViewController
@@ -154,6 +156,9 @@ extern id _objc_rootAutorelease(id obj);
     [self objectMemoryLayoutAlignTest];
     
     [self addPropertyToCategoryTest];
+    
+//    [self autoreleasepoolCase];
+    [self keepWorkThreadAliveAndDoMore];
 }
 
 
@@ -238,11 +243,79 @@ extern id _objc_rootAutorelease(id obj);
 }
 
 
+
+- (void)autoreleasepoolCase {
+    
+    for (int i=0; i<9999; i++) {
+//        @autoreleasepool {
+            NSString *str = [NSString stringWithFormat:@"hello world：%@", @(i)];
+            NSLog(@"str:%@", str);            
+//        }
+    }
+}
+
+
+- (void)keepWorkThreadAliveAndDoMore {
+    
+    void (^entrance)(void) = ^(void) {
+        [NSThread currentThread].name = @"com.mywork.thread";
+        self.myWorkThread = [NSThread currentThread];
+        [[NSRunLoop currentRunLoop] addPort:[NSPort new] forMode:NSRunLoopCommonModes];
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantFuture]];
+    };
+    
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        entrance();
+//    });
+    
+    self.myWorkThread = [[NSThread alloc] initWithBlock:^{
+        entrance();
+    }];
+    [self.myWorkThread start];
+    
+    
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+    });
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(stopMyWorkRunloop) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+    });
+}
+
+- (void)stopMyWorkRunloop {
+//    CFRunLoopStop(CFRunLoopGetCurrent());
+    [NSThread exit];
+}
+
+
+- (void)stopRunLoop {
+    
+}
+
+- (void)startJob {
+    NSLog(@"start job at thread:%@", [NSThread currentThread]);
+    
+    [self autoreleasepoolCase];
+}
+
+
 #pragma mark - 类别+属性
 - (void)addPropertyToCategoryTest {
     Person *p = Person.new;
     p.categoryProperty = self;
 }
+
+
+
+
 
 
 - (void)buildMainView {

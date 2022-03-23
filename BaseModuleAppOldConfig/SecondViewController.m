@@ -8,7 +8,7 @@
 #import "SecondViewController.h"
 #import "objc-retainCount/NSObject+GACRetainCount.h"
 #import <ReactiveObjC.h>
-
+#import "objc-retainCount/NSObject+GACRetainCount.h"
 
 
 
@@ -88,8 +88,25 @@ void myFunctionWithBlock(dispatch_block_t block) {
 
     
 //    [self blockTest];
-    [self threadSafeCase];
+//    [self threadSafeCase];
     
+    [self localWeakVarCase];
+    
+}
+
+#pragma mark - test case
+- (void)localWeakVarCase {
+    id strong = NSObject.new;
+    __weak id obj = nil;
+
+    @autoreleasepool {
+        obj = strong;
+        NSLog(@"obj:%@", obj);
+        NSInteger retainCount = [obj rq_retainCount];
+        NSLog(@"hello");
+    }
+    NSInteger retainCount = [obj rq_retainCount];
+    NSLog(@"hello");
 }
 
 
@@ -153,6 +170,8 @@ void myFunctionWithBlock(dispatch_block_t block) {
 
 
 
+
+#pragma mark -
 
 - (void)dealloc {
     NSLog(@"dealloc ");

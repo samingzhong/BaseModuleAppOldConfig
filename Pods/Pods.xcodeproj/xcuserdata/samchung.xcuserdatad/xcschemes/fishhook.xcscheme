@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1300"
+   LastUpgradeVersion = "1240"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "086B555C27D1C08B00E844D0"
-               BuildableName = "BaseModuleAppOldConfig.app"
-               BlueprintName = "BaseModuleAppOldConfig"
-               ReferencedContainer = "container:BaseModuleAppOldConfig.xcodeproj">
+               BlueprintIdentifier = "58CAF5B0291DAB42086F0645150E1791"
+               BuildableName = "fishhook.framework"
+               BlueprintName = "fishhook"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,16 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "086B555C27D1C08B00E844D0"
-            BuildableName = "BaseModuleAppOldConfig.app"
-            BlueprintName = "BaseModuleAppOldConfig"
-            ReferencedContainer = "container:BaseModuleAppOldConfig.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,16 +47,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "086B555C27D1C08B00E844D0"
-            BuildableName = "BaseModuleAppOldConfig.app"
-            BlueprintName = "BaseModuleAppOldConfig"
-            ReferencedContainer = "container:BaseModuleAppOldConfig.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

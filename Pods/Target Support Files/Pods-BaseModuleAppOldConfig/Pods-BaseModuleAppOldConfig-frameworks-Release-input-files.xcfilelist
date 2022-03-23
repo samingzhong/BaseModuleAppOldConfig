@@ -2,3 +2,4 @@ ${PODS_ROOT}/Target Support Files/Pods-BaseModuleAppOldConfig/Pods-BaseModuleApp
 ${BUILT_PRODUCTS_DIR}/JSPatch/JSPatch.framework
 ${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework
 ${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework
+${BUILT_PRODUCTS_DIR}/fishhook/fishhook.framework
