@@ -21,6 +21,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
+    
+    void (^MyBlock)(void) = ^() {
+        NSLog(@"self;%@", self);
+    };
+    MyBlock();
+    
+    
     self.window = [[UIWindow alloc] init];
     self.window.backgroundColor = UIColor.redColor;
     

@@ -132,6 +132,7 @@
 		086B555F27D1C08B00E844D0 /* BaseModuleAppOldConfig */ = {
 			isa = PBXGroup;
 			children = (
+				08ADAF3127F6A22D007CF1BA /* APM */,
 				0869E36727EB174E0067E880 /* OC hook */,
 				0869E36627EB173F0067E880 /* C hook */,
 				0869E35E27E1B3360067E880 /* objc-retainCount */,
@@ -140,8 +141,6 @@
 				086B557927D1E78600E844D0 /* CategoryUtils */,
 				08ED1B3C27D740A3007D6DC6 /* HomeNavigationBar */,
 				0869E36227E96E830067E880 /* WeakProxy */,
-				086B556127D1C08B00E844D0 /* AppDelegate.m */,
-				086B556027D1C08B00E844D0 /* AppDelegate.h */,
 				086B556627D1C08B00E844D0 /* MainViewController.h */,
 				086B556027D1C08B00E844D0 /* AppDelegate.h */,
 				086B556127D1C08B00E844D0 /* AppDelegate.m */,
@@ -165,6 +164,21 @@
 				086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */,
 			);
 			path = CategoryUtils;
+			sourceTree = "<group>";
+		};
+		08ADAF3127F6A22D007CF1BA /* APM */ = {
+			isa = PBXGroup;
+			children = (
+				08ADAF3227F6A236007CF1BA /* task_thread */,
+			);
+			path = APM;
+			sourceTree = "<group>";
+		};
+		08ADAF3227F6A236007CF1BA /* task_thread */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = task_thread;
 			sourceTree = "<group>";
 		};
 		08ED1B1227D5EC69007D6DC6 /* synthesize */ = {

@@ -93,6 +93,9 @@ typedef NS_ENUM(NSInteger, MVState) {
 
 
 @property (nonatomic, strong) NSThread *myWorkThread;
+
+#pragma mark
+@property (nonatomic, strong) dispatch_queue_t myWorkQueue;
 @end
 
 @implementation MainViewController
@@ -105,6 +108,8 @@ extern id _objc_rootAutorelease(id obj);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.myWorkQueue = dispatch_queue_create("my.work.queue", DISPATCH_QUEUE_CONCURRENT);
     
     [DownLoader downloadWithUrl:@"https://vd3.bdstatic.com/mda-ncdf5p17j4ztsdaw/sc/cae_h264_delogo/1647263253838817803/mda-ncdf5p17j4ztsdaw.mp4?v_from_s=hkapp-haokan-hnb&auth_key=1647327438-0-0-5e27273cca0976df226d33c8f764990c&bcevod_channel=searchbox_feed&cd=0&pd=1&pt=3&logid=1637974093&vid=15318298559196487317&abtest=100815_2-17451_1&klogid=1637974093" block:nil];
 //    [DownLoader downloadWithUrl:@"https://t7.baidu.com/it/u=2295973985,242574375&fm=193&f=GIF" block:nil];
@@ -158,12 +163,15 @@ extern id _objc_rootAutorelease(id obj);
     [self addPropertyToCategoryTest];
     
 //    [self autoreleasepoolCase];
-    [self keepWorkThreadAliveAndDoMore];
+//    [self keepWorkThreadAliveAndDoMore];
+    
+//    [self autoreleaseCase];
 }
 
 
 -(void)copyTest {
-    Person *p  = [XXPerson new];
+    XXPerson *p  = [XXPerson new];
+    [p baseCommonMethodA];
 //    p.name = @"hello";
 //    self.person = p;
 //    self.block = ^{
@@ -292,7 +300,7 @@ extern id _objc_rootAutorelease(id obj);
 
 - (void)stopMyWorkRunloop {
 //    CFRunLoopStop(CFRunLoopGetCurrent());
-    [NSThread exit];
+//    [NSThread exit];
 }
 
 
@@ -493,8 +501,37 @@ extern id _objc_rootAutorelease(id obj);
 
 
 - (void)test {
+    [self performSelector:@selector(autoreleaseObjInworkThreadCase) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+//    return;
+   
+    Person *p = [Person new];
     SecondViewController *vc = SecondViewController.new;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)autoreleaseCase {
+//    @autoreleasepool {
+//        Person *p = [Person autoreleasePerson];
+//    }
+//    Person *p = [Person autoreleasePerson];
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        Person *p = [Person autoreleasePerson];
+//        NSLog(@"p:%@", p);
+//    });
+    
+    self.myWorkThread = [[NSThread alloc] initWithBlock:^{
+        NSThread.currentThread.name = @"hello.thread";
+        NSRunLoop *rl = [NSRunLoop currentRunLoop];
+        [rl addPort:NSPort.new forMode:NSRunLoopCommonModes];
+        [rl runUntilDate:[NSDate distantFuture]];
+        
+        }];
+    [self.myWorkThread start];
+}
+
+- (void)autoreleaseObjInworkThreadCase {
+    Person *p = [Person autoreleasePerson];
+    NSLog(@"p:%@", p);
 }
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 //    [self.nextResponder touchesBegan:touches withEvent:event];
@@ -519,5 +556,22 @@ extern id _objc_rootAutorelease(id obj);
 //- (void)viewDidLoad {
 //    NSLog(@"hello ");
 //}
+
+@end
+
+
+@implementation MainViewController (GCDTestCase)
+
+- (void)dispatch_group {
+    
+}
+
+- (void)dispatch_semphere {
+    
+}
+
+- (void)dispatch_barriar {
+    
+}
 
 @end

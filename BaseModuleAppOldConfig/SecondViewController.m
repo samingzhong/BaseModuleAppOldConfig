@@ -13,6 +13,8 @@
 
 #import <Masonry.h>
 
+#import "WeakProxy/WeakProxy.h"
+
 
 @interface Touch2 : UIView
 
@@ -142,10 +144,26 @@ void myFunctionWithBlock(dispatch_block_t block) {
 
 
 
+@interface MyTimer : NSTimer
+
+@end
+
+@implementation MyTimer
+
+- (void)dealloc {
+    NSLog(@"dealloc....");
+}
+
+@end
+
+
 
 @interface SecondViewController ()
 
 @property (nonatomic, strong) MyObject *myObj;
+
+@property (nonatomic, strong) NSTimer *timer;
+
 
 @end
 
@@ -180,6 +198,8 @@ void myFunctionWithBlock(dispatch_block_t block) {
 //    [self threadSafeCase];
     
     [self localWeakVarCase];
+    
+    [self memeryLeakCase];
     
 }
 
@@ -258,12 +278,36 @@ void myFunctionWithBlock(dispatch_block_t block) {
 }
 
 
+#pragma mark - 内存泄漏用法case
+- (void)memeryLeakCase {
+//    self.timer = [MyTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//        NSLog(@"self...");
+//    }];
+    
+    self.timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(handleTimer) userInfo:nil repeats:YES];
+    
+    
+//    self.timer = [NSTimer timerWithTimeInterval:2 target:[WeakProxy proxyWithTarget:self] selector:@selector(handleTimer) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    [self.timer fire];
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.timer invalidate];
+//    });
+}
+
+- (void)handleTimer {
+    NSLog(@"self:%@", self);
+}
+
+
 
 
 #pragma mark -
 
 - (void)dealloc {
     NSLog(@"dealloc ");
+    [self.timer invalidate];
 }
 
 

@@ -24,11 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)classMethod;
 
++ (instancetype)autoreleasePerson;
+
+- (void)baseCommonMethodA;
 @end
 
 
 
 @interface XXPerson : Person
+
 
 @end
 

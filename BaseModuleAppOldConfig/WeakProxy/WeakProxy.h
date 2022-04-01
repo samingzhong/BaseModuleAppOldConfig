@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WeakProxy : NSProxy
 
-+ (instancetype)weakProxyWithTarget:(id)target;
++ (instancetype)proxyWithTarget:(id)target;
 
 @end
 
