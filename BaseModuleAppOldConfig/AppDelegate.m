@@ -13,6 +13,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, assign) NSObject *obj1;
+
 @end
 
 @implementation AppDelegate
@@ -23,11 +25,19 @@
     
     
     
+    {
+    self.obj1 = NSObject.new;
+    }
+    
+    
     void (^MyBlock)(void) = ^() {
         NSLog(@"self;%@", self);
     };
     MyBlock();
     
+//    [self.obj1 description];
+    NSLog(@"obj1:%@", self);
+
     
     self.window = [[UIWindow alloc] init];
     self.window.backgroundColor = UIColor.redColor;

@@ -18,6 +18,7 @@
 #import "Person+A.h"
 
 #import "DownLoader.h"
+#import "HomeViewController.h"
 
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
@@ -501,6 +502,11 @@ extern id _objc_rootAutorelease(id obj);
 
 
 - (void)test {
+    HomeViewController *homeVC = HomeViewController.new;
+    [self.navigationController pushViewController:homeVC animated:YES];
+    return;;
+    
+    
     [self performSelector:@selector(autoreleaseObjInworkThreadCase) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
 //    return;
    
