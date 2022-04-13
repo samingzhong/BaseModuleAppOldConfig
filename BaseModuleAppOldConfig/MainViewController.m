@@ -97,6 +97,14 @@ typedef NS_ENUM(NSInteger, MVState) {
 
 #pragma mark
 @property (nonatomic, strong) dispatch_queue_t myWorkQueue;
+
+
+#pragma mark block
+@property (nonatomic, assign) void (^myBlock)(void);
+@property (nonatomic, assign) int j;
+
+@property (nonatomic, strong) NSThread *thread;
+
 @end
 
 @implementation MainViewController
@@ -106,16 +114,90 @@ extern id _objc_rootRetain(id obj);
 extern void _objc_rootRelease(id obj);
 extern id _objc_rootAutorelease(id obj);
 
+static int s_i = 1;
+
+
+void exampleA() {
+  char a = 'A';
+  ^{
+    printf("%cn", a);
+  }();
+}
+
+
+- (void)sayHello {
+    NSLog(@"hello ");
+//    usleep(1000000);
+    [self autoreleasepoolCase];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    exampleA();
+    
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSLog(@"work thread:%@", [NSThread currentThread]);
+        [NSThread currentThread].name = @"autureleasepool.thread";
+        self.thread = NSThread.currentThread;
+        [self addRunLoopObserver];
+        
+//        [self performSelector:@selector(sayHello) withObject:nil afterDelay:10];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+        });
+    });
+    
+    
+    
+    
+//    [self controlGCDMaxThreadInQueue];
+//    [self gcdThreadExpose];
+    
+    #pragma mark block -
+    {
+        int i_i;
+        
+        void (^block0)(void) = ^{
+            NSLog(@"hello:%d", i_i);
+        };
+        self.myBlock = ^{
+            NSLog(@"hello:%d", i_i);
+        };
+        //    Block_copy(self.myBlock);
+        
+        int i = 0;
+        void (^block)(void) = ^{
+            NSLog(@"i:%d", i);
+        };
+        NSLog(@"block:%@", block);
+        
+        
+        void (^block1)(void) = ^{
+            NSLog(@"self:%@", self);
+        };
+        NSLog(@"block:%@", block1);
+        
+        void (^block2)(void) = ^{
+            //        s_i = 2;
+        };
+        NSLog(@"block:%@", block2);
+        
+        
+        int j = 0;
+        self.j = j;
+    }
+    
+    
+    
+    
     
     self.myWorkQueue = dispatch_queue_create("my.work.queue", DISPATCH_QUEUE_CONCURRENT);
     
-    [DownLoader downloadWithUrl:@"https://vd3.bdstatic.com/mda-ncdf5p17j4ztsdaw/sc/cae_h264_delogo/1647263253838817803/mda-ncdf5p17j4ztsdaw.mp4?v_from_s=hkapp-haokan-hnb&auth_key=1647327438-0-0-5e27273cca0976df226d33c8f764990c&bcevod_channel=searchbox_feed&cd=0&pd=1&pt=3&logid=1637974093&vid=15318298559196487317&abtest=100815_2-17451_1&klogid=1637974093" block:nil];
+//    [DownLoader downloadWithUrl:@"https://vd3.bdstatic.com/mda-ncdf5p17j4ztsdaw/sc/cae_h264_delogo/1647263253838817803/mda-ncdf5p17j4ztsdaw.mp4?v_from_s=hkapp-haokan-hnb&auth_key=1647327438-0-0-5e27273cca0976df226d33c8f764990c&bcevod_channel=searchbox_feed&cd=0&pd=1&pt=3&logid=1637974093&vid=15318298559196487317&abtest=100815_2-17451_1&klogid=1637974093" block:nil];
 //    [DownLoader downloadWithUrl:@"https://t7.baidu.com/it/u=2295973985,242574375&fm=193&f=GIF" block:nil];
     
-    
+     
     
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColor.grayColor;
@@ -156,15 +238,15 @@ extern id _objc_rootAutorelease(id obj);
 //    [self zombieTest];
 //    [self zombieTest];
     
-    [self gcdThreadCooTest];
-    
-    [self copyTest];
-    [self objectMemoryLayoutAlignTest];
-    
-    [self addPropertyToCategoryTest];
+//    [self gcdThreadCooTest];
+//    
+//    [self copyTest];
+//    [self objectMemoryLayoutAlignTest];
+//    
+//    [self addPropertyToCategoryTest];
     
 //    [self autoreleasepoolCase];
-//    [self keepWorkThreadAliveAndDoMore];
+    [self keepWorkThreadAliveAndDoMore];
     
 //    [self autoreleaseCase];
 }
@@ -192,6 +274,15 @@ extern id _objc_rootAutorelease(id obj);
     
 //    NSLog(@"self.name:%@", self.person.name);
     NSLog(@"sdfaf");
+    
+    static int i = 0;
+    
+    i++;
+    if (i>=5) {
+        [self stopMyWorkRunloop];
+    } else {
+        [self startAutoreleaeObjJobOnWorkThread];
+    }
     
 }
 
@@ -257,7 +348,7 @@ extern id _objc_rootAutorelease(id obj);
     
     for (int i=0; i<9999; i++) {
 //        @autoreleasepool {
-            NSString *str = [NSString stringWithFormat:@"hello world：%@", @(i)];
+            NSString *str = [NSString stringWithFormat:@"hello world：%@", @(random())];
             NSLog(@"str:%@", str);            
 //        }
     }
@@ -285,23 +376,33 @@ extern id _objc_rootAutorelease(id obj);
     
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+//    });
     
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self performSelector:@selector(stopMyWorkRunloop) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
-    });
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
-    });
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self performSelector:@selector(stopMyWorkRunloop) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+//    });
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+//    });
 }
 
+- (void)startAutoreleaeObjJobOnWorkThread {
+    [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+}
+
+- (void)endWorkThread {
+    [self performSelector:@selector(startJob) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+}
+
+
+
 - (void)stopMyWorkRunloop {
-//    CFRunLoopStop(CFRunLoopGetCurrent());
-//    [NSThread exit];
+    CFRunLoopStop(CFRunLoopGetCurrent());
+    [NSThread exit];
 }
 
 
@@ -316,10 +417,140 @@ extern id _objc_rootAutorelease(id obj);
 }
 
 
+
+#pragma mark - runloop observer
+static CFAbsoluteTime sTime;
+static void YYRunLoopAutoreleasePoolObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info) {
+    switch (activity) {
+        case kCFRunLoopEntry: {
+            YYAutoreleasePoolPush();// 进入循环，先创建池子。
+        } break;
+            
+        case kCFRunLoopAfterWaiting: {
+            NSLog(@"runloop醒来了");
+            sTime = CFAbsoluteTimeGetCurrent();
+        } break;
+        case kCFRunLoopBeforeWaiting: {//进入休眠前，释放池子里的对象、并且重新创建一个池子。
+            CFTimeInterval intervalTime = CFAbsoluteTimeGetCurrent()-sTime;
+            NSLog(@"runloop即将休眠:%f", intervalTime);
+
+            YYAutoreleasePoolPop();
+            YYAutoreleasePoolPush();
+        } break;
+        case kCFRunLoopExit: {
+            YYAutoreleasePoolPop(); // 退出循环，释放池子。
+        } break;
+        default: break;
+    }
+}
+
+static void YYAutoreleasePoolPush() {
+    NSLog(@"autoreleasepool push in thread:%@", [NSThread currentThread]);
+}
+
+static void YYAutoreleasePoolPop() {
+    NSLog(@"autoreleasepool pop in thread:%@", [NSThread currentThread]);
+}
+
+- (void)addRunLoopObserver {
+    
+    
+    CFRunLoopRef runloop = CFRunLoopGetCurrent();
+
+//    CFRunLoopObserverRef pushObserver;
+//    pushObserver = CFRunLoopObserverCreate(CFAllocatorGetDefault(), kCFRunLoopEntry,
+//                                           true,         // repeat
+//                                           -0x7FFFFFFF,  // before other observers
+//                                           YYRunLoopAutoreleasePoolObserverCallBack, NULL);
+//    CFRunLoopAddObserver(runloop, pushObserver, kCFRunLoopCommonModes);
+//    CFRelease(pushObserver);
+    
+    
+    
+    CFRunLoopObserverRef popObserver;
+    popObserver = CFRunLoopObserverCreate(CFAllocatorGetDefault(),
+                                          kCFRunLoopAllActivities,
+                                          true,        // repeat
+                                          0x7FFFFFFF,  // after other observers
+                                          YYRunLoopAutoreleasePoolObserverCallBack, NULL);
+    CFRunLoopAddObserver(runloop, popObserver, kCFRunLoopCommonModes);
+    CFRelease(popObserver);
+    
+    [[NSRunLoop currentRunLoop] addPort:[NSPort new] forMode:NSRunLoopCommonModes];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantFuture]];
+    
+}
+
+
 #pragma mark - 类别+属性
 - (void)addPropertyToCategoryTest {
     Person *p = Person.new;
     p.categoryProperty = self;
+}
+
+
+- (void)gcdThreadExpose {
+    
+    __block int sum = 0;
+    void (^costTimeJob)(void) = ^ {
+        for (int i=0; i<1000000; i++) {
+            sum+=i;
+        }
+        sleep(arc4random()%10);
+        NSLog(@"sum:%d", sum);
+    };
+    
+    dispatch_semaphore_t sem = dispatch_semaphore_create(2);
+    
+    for (int i=0; i<1000; i++) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+            NSLog(@"job:%@ start in thread:%@", @(i), [NSThread currentThread]);
+            costTimeJob();
+            NSLog(@"job:%@ done in thread:%@", @(i), [NSThread currentThread]);
+            dispatch_semaphore_signal(sem);
+        });
+    }
+}
+
+
+
+- (void)controlGCDMaxThreadInQueue {
+
+    dispatch_semaphore_t sem = dispatch_semaphore_create(2);
+    dispatch_queue_t q = dispatch_queue_create("my.queue", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_async(q, ^{
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+        //job
+        NSLog(@"job ....");
+        sleep(10);
+        NSLog(@"job done....");
+    });
+    
+    dispatch_async(q, ^{
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+        //job
+        NSLog(@"job ....");
+        sleep(15);
+        NSLog(@"job done....");
+    });
+    
+    dispatch_async(q, ^{
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+        //job
+        NSLog(@"job ....");
+        sleep(20);
+        NSLog(@"job done....");
+    });
+    
+    dispatch_async(q, ^{
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+        //job
+        NSLog(@"job ....");
+        sleep(25);
+        NSLog(@"job done....");
+    });
+    
 }
 
 
@@ -502,6 +733,9 @@ extern id _objc_rootAutorelease(id obj);
 
 
 - (void)test {
+    
+    [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+    
     HomeViewController *homeVC = HomeViewController.new;
     [self.navigationController pushViewController:homeVC animated:YES];
     return;;
@@ -580,4 +814,10 @@ extern id _objc_rootAutorelease(id obj);
     
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    self.myBlock();
+    [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+
+}
 @end

@@ -186,10 +186,33 @@ void myFunctionWithBlock(dispatch_block_t block) {
     myFunctionWithBlock(^{
         NSLog(@"self :%@", self);
     });
+
+    
+    {
+        dispatch_queue_t q = dispatch_queue_create("concurrentQueue", DISPATCH_QUEUE_CONCURRENT);
+//        dispatch_queue_t q = dispatch_queue_create("concurrentQueue", DISPATCH_QUEUE_SERIAL);
+
+        static int sum = 0;
+        for (int i=0; i<1000; i++) {
+            dispatch_async(q, ^{
+                sum+=i;
+                NSLog(@"job:%d in %@, sum:%d", i, [NSThread currentThread], sum);
+
+            });
+        
+            
+//            dispatch_apply(1000, q, ^(size_t iteration) {
+//                sum+=i;
+//                NSLog(@"job:%d in %@, sum:%d", i, [NSThread currentThread], sum);
+//            });
+        }
+    }
     
     
-    //    [self blockTest];
-    //    [self threadSafeCase];
+    
+    
+//    [self blockTest];
+//    [self threadSafeCase];
     
     MyView *view = [MyView new];
     //    [self.view addSubview:view];

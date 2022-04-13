@@ -7,6 +7,8 @@ target 'BaseModuleAppOldConfig' do
 
   # Pods for BaseModuleAppOldConfig
   pod 'Masonry'
+  pod 'SDWebImage'
+  pod 'AFNetworking'
   pod 'ReactiveObjC'
   pod 'JSPatch'
   pod 'fishhook'
