@@ -19,6 +19,8 @@
 
 #import "DownLoader.h"
 #import "HomeViewController.h"
+#import "MsgForwardTestClass.h"
+#import <objc/runtime.h>
 
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
@@ -131,22 +133,44 @@ void exampleA() {
     [self autoreleasepoolCase];
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     exampleA();
     
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSLog(@"work thread:%@", [NSThread currentThread]);
-        [NSThread currentThread].name = @"autureleasepool.thread";
-        self.thread = NSThread.currentThread;
-        [self addRunLoopObserver];
+#pragma mark msgForwardingTest
+    void (^msgForwardingTest)(void) = ^() {
+        MsgForwardTestClass *obj = [MsgForwardTestClass new];
+        [obj methodWithoutImpletation];
+//
+//        [obj performSelector:@selector(hello) withObject:@"hello"];
         
-//        [self performSelector:@selector(sayHello) withObject:nil afterDelay:10];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+//        _objc_msgForward(obj, @selector(hello));
+    };
+    msgForwardingTest();
+    
+    
+    
+    
+    [self addRunLoopObserver];
+    
+    
+    
+    void (^workThreadRunloopBlock)(void) = ^{
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSLog(@"work thread:%@", [NSThread currentThread]);
+            [NSThread currentThread].name = @"autureleasepool.thread";
+            self.thread = NSThread.currentThread;
+            [self addRunLoopObserver];
+            
+            //        [self performSelector:@selector(sayHello) withObject:nil afterDelay:10];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+            });
         });
-    });
+    };
+//    workThreadRunloopBlock();
     
     
     
@@ -154,8 +178,8 @@ void exampleA() {
 //    [self controlGCDMaxThreadInQueue];
 //    [self gcdThreadExpose];
     
-    #pragma mark block -
-    {
+    #pragma mark blockTest
+    void (^blockTest)(void) = ^() {
         int i_i;
         
         void (^block0)(void) = ^{
@@ -186,7 +210,8 @@ void exampleA() {
         
         int j = 0;
         self.j = j;
-    }
+    };
+//    blockTest();
     
     
     
@@ -417,6 +442,11 @@ void exampleA() {
 }
 
 
+#pragma mark - Message Forwarding (消息转发）
+- (void)msgForwardingCase {
+    
+}
+
 
 #pragma mark - runloop observer
 static CFAbsoluteTime sTime;
@@ -475,6 +505,10 @@ static void YYAutoreleasePoolPop() {
                                           YYRunLoopAutoreleasePoolObserverCallBack, NULL);
     CFRunLoopAddObserver(runloop, popObserver, kCFRunLoopCommonModes);
     CFRelease(popObserver);
+    
+    if ([[NSThread currentThread] isEqual:[NSThread mainThread]]) {
+        return;
+    }
     
     [[NSRunLoop currentRunLoop] addPort:[NSPort new] forMode:NSRunLoopCommonModes];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantFuture]];

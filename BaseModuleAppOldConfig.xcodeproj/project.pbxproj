@@ -20,6 +20,7 @@
 		086B558027D20F4600E844D0 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557F27D20F4600E844D0 /* SecondViewController.m */; };
 		08A71FA827FED3A300E3EA7A /* NSObject+Observe.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A71FA727FED3A300E3EA7A /* NSObject+Observe.m */; };
 		08A71FBF28001B1800E3EA7A /* AppDelegate+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A71FBE28001B1800E3EA7A /* AppDelegate+Block.m */; };
+		08AA7CA0280FB7A30077D11C /* MsgForwardTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA7C9F280FB7A30077D11C /* MsgForwardTestClass.m */; };
 		08B17BB62803CC810076402B /* ClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B17BB52803CC810076402B /* ClassA.m */; };
 		08B17BB92803CCF90076402B /* ClassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B17BB82803CCF90076402B /* ClassB.m */; };
 		08B17BBC2803CD650076402B /* MethodExchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 08B17BBB2803CD650076402B /* MethodExchange.c */; };
@@ -64,6 +65,8 @@
 		08A71FA727FED3A300E3EA7A /* NSObject+Observe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Observe.m"; sourceTree = "<group>"; };
 		08A71FBD28001B1800E3EA7A /* AppDelegate+Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Block.h"; sourceTree = "<group>"; };
 		08A71FBE28001B1800E3EA7A /* AppDelegate+Block.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Block.m"; sourceTree = "<group>"; };
+		08AA7C9E280FB7A30077D11C /* MsgForwardTestClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgForwardTestClass.h; sourceTree = "<group>"; };
+		08AA7C9F280FB7A30077D11C /* MsgForwardTestClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgForwardTestClass.m; sourceTree = "<group>"; };
 		08B17BB42803CC810076402B /* ClassA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassA.h; sourceTree = "<group>"; };
 		08B17BB52803CC810076402B /* ClassA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassA.m; sourceTree = "<group>"; };
 		08B17BB72803CCF90076402B /* ClassB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassB.h; sourceTree = "<group>"; };
@@ -155,9 +158,6 @@
 				0AA506B92801CC3E00BC084C /* UIView */,
 				08B17BB22803CC590076402B /* Runtime */,
 				08A71FBC28001B0400E3EA7A /* Block */,
-				08ADAF3127F6A22D007CF1BA /* APM */,
-				0869E36727EB174E0067E880 /* OC hook */,
-				0869E36627EB173F0067E880 /* C hook */,
 				0869E35E27E1B3360067E880 /* objc-retainCount */,
 				08ED1B4427D89623007D6DC6 /* Models */,
 				08ED1B1227D5EC69007D6DC6 /* synthesize */,
@@ -206,24 +206,19 @@
 			path = Block;
 			sourceTree = "<group>";
 		};
-		08ADAF3127F6A22D007CF1BA /* APM */ = {
+		08AA7C9D280FB7650077D11C /* MsgForward */ = {
 			isa = PBXGroup;
 			children = (
-				08ADAF3227F6A236007CF1BA /* task_thread */,
+				08AA7C9E280FB7A30077D11C /* MsgForwardTestClass.h */,
+				08AA7C9F280FB7A30077D11C /* MsgForwardTestClass.m */,
 			);
-			path = APM;
-			sourceTree = "<group>";
-		};
-		08ADAF3227F6A236007CF1BA /* task_thread */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = task_thread;
+			path = MsgForward;
 			sourceTree = "<group>";
 		};
 		08B17BB22803CC590076402B /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				08AA7C9D280FB7650077D11C /* MsgForward */,
 				08B17BB32803CC670076402B /* Method exchange */,
 			);
 			path = Runtime;
@@ -441,6 +436,7 @@
 				0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */,
 				0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */,
 				08B17BB92803CCF90076402B /* ClassB.m in Sources */,
+				08AA7CA0280FB7A30077D11C /* MsgForwardTestClass.m in Sources */,
 				086B558027D20F4600E844D0 /* SecondViewController.m in Sources */,
 				08D0209727E033ED00281009 /* DownLoader.m in Sources */,
 				086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */,
@@ -612,7 +608,6 @@
 				INFOPLIST_FILE = BaseModuleAppOldConfig/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -641,7 +636,6 @@
 				INFOPLIST_FILE = BaseModuleAppOldConfig/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

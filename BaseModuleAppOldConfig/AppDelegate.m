@@ -153,7 +153,8 @@
     self.window = [[UIWindow alloc] init];
     self.window.backgroundColor = UIColor.redColor;
     
-    MainViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+//    MainViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    MainViewController *vc = [MainViewController new];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
@@ -194,6 +195,32 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
 
+}
+
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    __block UIBackgroundTaskIdentifier taskId = [application beginBackgroundTaskWithExpirationHandler:^{
+//        [application endBackgroundTask:taskId];
+//        taskId = UIBackgroundTaskInvalid;
+    }];
+    
+    [self longTimeTaskWithCompletion:^{
+        [application endBackgroundTask:taskId];
+        taskId = UIBackgroundTaskInvalid;
+    }];
+}
+
+- (void)longTimeTaskWithCompletion:(void (^)(void))block {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (int i = 0; i<10; i++) {
+            NSLog(@"before sleep:%d", i+1);
+            sleep(10*(i+1));
+            NSLog(@"after sleep:%d", i+1);
+        }
+        if (block) {
+            block();
+        }
+    });
 }
 
 @end
