@@ -7,8 +7,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController {
+    id kvc_key;
+}
 
+
+@end
+
+
+@interface MainViewController (featureA)
+@property (nonatomic, strong) NSObject *fa_obj;
+@end
+
+
+@interface MainViewController (featureB)
+@property (nonatomic, strong) NSObject *fb_obj;
 
 @end
 

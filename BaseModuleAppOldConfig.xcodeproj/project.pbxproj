@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08133EA128193ADD0079101F /* MainViewController+BlockTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 08133EA028193ADD0079101F /* MainViewController+BlockTest.m */; };
+		08133EA528193E360079101F /* NSObject+size.m in Sources */ = {isa = PBXBuildFile; fileRef = 08133EA428193E360079101F /* NSObject+size.m */; };
+		08133EAB281A7C0D0079101F /* MainViewController+KVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 08133EAA281A7C0D0079101F /* MainViewController+KVC.m */; };
+		08133EAF281A9A9D0079101F /* MainViewController+Load_Initialize.m in Sources */ = {isa = PBXBuildFile; fileRef = 08133EAE281A9A9D0079101F /* MainViewController+Load_Initialize.m */; };
+		08133EB2281A9AE40079101F /* MainViewController+Load_Initialize2.m in Sources */ = {isa = PBXBuildFile; fileRef = 08133EB1281A9AE40079101F /* MainViewController+Load_Initialize2.m */; };
 		082B0D312806B22C00CB0879 /* AutoReleasePoolUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B0D302806B22C00CB0879 /* AutoReleasePoolUtil.m */; };
 		0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */; };
 		0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0869E36427E96EFE0067E880 /* WeakProxy.m */; };
 		086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556127D1C08B00E844D0 /* AppDelegate.m */; };
-		086B556827D1C08B00E844D0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556727D1C08B00E844D0 /* MainViewController.m */; };
+		086B556827D1C08B00E844D0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556727D1C08B00E844D0 /* MainViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		086B556B27D1C08B00E844D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086B556927D1C08B00E844D0 /* Main.storyboard */; };
 		086B556D27D1C08F00E844D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086B556C27D1C08F00E844D0 /* Assets.xcassets */; };
 		086B557027D1C08F00E844D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086B556E27D1C08F00E844D0 /* LaunchScreen.storyboard */; };
@@ -40,6 +45,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08133E9F28193ADD0079101F /* MainViewController+BlockTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MainViewController+BlockTest.h"; sourceTree = "<group>"; };
+		08133EA028193ADD0079101F /* MainViewController+BlockTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MainViewController+BlockTest.m"; sourceTree = "<group>"; };
+		08133EA328193E360079101F /* NSObject+size.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+size.h"; sourceTree = "<group>"; };
+		08133EA428193E360079101F /* NSObject+size.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+size.m"; sourceTree = "<group>"; };
+		08133EA62819425E0079101F /* MainViewController+MyBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MainViewController+MyBlock.h"; sourceTree = "<group>"; };
+		08133EA9281A7C0D0079101F /* MainViewController+KVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MainViewController+KVC.h"; sourceTree = "<group>"; };
+		08133EAA281A7C0D0079101F /* MainViewController+KVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MainViewController+KVC.m"; sourceTree = "<group>"; };
+		08133EAD281A9A9D0079101F /* MainViewController+Load_Initialize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MainViewController+Load_Initialize.h"; sourceTree = "<group>"; };
+		08133EAE281A9A9D0079101F /* MainViewController+Load_Initialize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MainViewController+Load_Initialize.m"; sourceTree = "<group>"; };
+		08133EB0281A9AE40079101F /* MainViewController+Load_Initialize2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MainViewController+Load_Initialize2.h"; sourceTree = "<group>"; };
+		08133EB1281A9AE40079101F /* MainViewController+Load_Initialize2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MainViewController+Load_Initialize2.m"; sourceTree = "<group>"; };
 		082B0D2F2806B22C00CB0879 /* AutoReleasePoolUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoReleasePoolUtil.h; sourceTree = "<group>"; };
 		082B0D302806B22C00CB0879 /* AutoReleasePoolUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoReleasePoolUtil.m; sourceTree = "<group>"; };
 		0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GACRetainCount.m"; sourceTree = "<group>"; };
@@ -115,6 +131,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08133EA228193E1C0079101F /* obj size */ = {
+			isa = PBXGroup;
+			children = (
+				08133EA328193E360079101F /* NSObject+size.h */,
+				08133EA428193E360079101F /* NSObject+size.m */,
+			);
+			path = "obj size";
+			sourceTree = "<group>";
+		};
+		08133EA8281A7BE60079101F /* KVC */ = {
+			isa = PBXGroup;
+			children = (
+				08133EA9281A7C0D0079101F /* MainViewController+KVC.h */,
+				08133EAA281A7C0D0079101F /* MainViewController+KVC.m */,
+			);
+			path = KVC;
+			sourceTree = "<group>";
+		};
+		08133EAC281A9A7C0079101F /* load_initialize */ = {
+			isa = PBXGroup;
+			children = (
+				08133EAD281A9A9D0079101F /* MainViewController+Load_Initialize.h */,
+				08133EAE281A9A9D0079101F /* MainViewController+Load_Initialize.m */,
+				08133EB0281A9AE40079101F /* MainViewController+Load_Initialize2.h */,
+				08133EB1281A9AE40079101F /* MainViewController+Load_Initialize2.m */,
+			);
+			path = load_initialize;
+			sourceTree = "<group>";
+		};
 		0869E35E27E1B3360067E880 /* objc-retainCount */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +199,8 @@
 		086B555F27D1C08B00E844D0 /* BaseModuleAppOldConfig */ = {
 			isa = PBXGroup;
 			children = (
+				08133EAC281A9A7C0079101F /* load_initialize */,
+				08133EA8281A7BE60079101F /* KVC */,
 				0A0142E328033B3B00EC5CC8 /* NSZombieObject */,
 				0AA506B92801CC3E00BC084C /* UIView */,
 				08B17BB22803CC590076402B /* Runtime */,
@@ -168,8 +215,11 @@
 				08A71FA727FED3A300E3EA7A /* NSObject+Observe.m */,
 				086B556027D1C08B00E844D0 /* AppDelegate.h */,
 				086B556127D1C08B00E844D0 /* AppDelegate.m */,
+				08133E9F28193ADD0079101F /* MainViewController+BlockTest.h */,
+				08133EA028193ADD0079101F /* MainViewController+BlockTest.m */,
 				086B556627D1C08B00E844D0 /* MainViewController.h */,
 				086B556727D1C08B00E844D0 /* MainViewController.m */,
+				08133EA62819425E0079101F /* MainViewController+MyBlock.h */,
 				082B0D2F2806B22C00CB0879 /* AutoReleasePoolUtil.h */,
 				082B0D302806B22C00CB0879 /* AutoReleasePoolUtil.m */,
 				086B557E27D20F4600E844D0 /* SecondViewController.h */,
@@ -218,6 +268,7 @@
 		08B17BB22803CC590076402B /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				08133EA228193E1C0079101F /* obj size */,
 				08AA7C9D280FB7650077D11C /* MsgForward */,
 				08B17BB32803CC670076402B /* Method exchange */,
 			);
@@ -436,8 +487,10 @@
 				0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */,
 				0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */,
 				08B17BB92803CCF90076402B /* ClassB.m in Sources */,
+				08133EA528193E360079101F /* NSObject+size.m in Sources */,
 				08AA7CA0280FB7A30077D11C /* MsgForwardTestClass.m in Sources */,
 				086B558027D20F4600E844D0 /* SecondViewController.m in Sources */,
+				08133EAF281A9A9D0079101F /* MainViewController+Load_Initialize.m in Sources */,
 				08D0209727E033ED00281009 /* DownLoader.m in Sources */,
 				086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */,
 				0A0142E628033B5800EC5CC8 /* NSObject+Zombie.m in Sources */,
@@ -445,6 +498,8 @@
 				08A71FA827FED3A300E3EA7A /* NSObject+Observe.m in Sources */,
 				086B556827D1C08B00E844D0 /* MainViewController.m in Sources */,
 				086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */,
+				08133EB2281A9AE40079101F /* MainViewController+Load_Initialize2.m in Sources */,
+				08133EAB281A7C0D0079101F /* MainViewController+KVC.m in Sources */,
 				0A34B38F2805D2190089804E /* HomeViewController.m in Sources */,
 				0A8E8CBD2805D6A900921DCB /* TableViewCellTypeA.m in Sources */,
 				082B0D312806B22C00CB0879 /* AutoReleasePoolUtil.m in Sources */,
@@ -453,6 +508,7 @@
 				08ED1B3F27D740C5007D6DC6 /* HomeNavigationBar.m in Sources */,
 				08B17BBC2803CD650076402B /* MethodExchange.c in Sources */,
 				08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */,
+				08133EA128193ADD0079101F /* MainViewController+BlockTest.m in Sources */,
 				08B17BB62803CC810076402B /* ClassA.m in Sources */,
 				08ED1B4727D89634007D6DC6 /* Person.m in Sources */,
 				086B557327D1C08F00E844D0 /* main.m in Sources */,

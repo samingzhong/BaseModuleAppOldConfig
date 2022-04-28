@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ClassA : NSObject
 
 
++ (ClassA *)classAWithName;
+
 - (void)methodA;
 
 

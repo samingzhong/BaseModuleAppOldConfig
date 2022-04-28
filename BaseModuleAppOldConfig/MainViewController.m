@@ -21,6 +21,9 @@
 #import "HomeViewController.h"
 #import "MsgForwardTestClass.h"
 #import <objc/runtime.h>
+#import "NSObject+Observe.h"
+#import "NSObject+size.h"
+#import "MainViewController+KVC.h"
 
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
@@ -88,7 +91,7 @@ typedef NS_ENUM(NSInteger, MVState) {
 @property (nonatomic, strong) HomeNavigationBar *bar;
 
 
-@property (nonatomic, assign) Person *person;
+@property (nonatomic, strong) Person *_person;
 
 @property (nonatomic, copy) void (^block)(void);
 
@@ -110,6 +113,8 @@ typedef NS_ENUM(NSInteger, MVState) {
 @end
 
 @implementation MainViewController
+
+@synthesize bar = bar;
 
 extern uintptr_t _objc_rootRetainCount(id obj);
 extern id _objc_rootRetain(id obj);
@@ -151,6 +156,7 @@ void exampleA() {
     msgForwardingTest();
     
     
+    [self manualKVOCase];
     
     
     [self addRunLoopObserver];
@@ -260,13 +266,23 @@ void exampleA() {
     });
     
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //willchange/didchange必须成对调用，有些场景不是通过setter方法设置成员变量的值，
+        // 调用willchange会做一个记录
+        [self willChangeValueForKey:@"state"];
+        NSLog(@"hello world");
+        // 调用didchange后会查找下之前有没有willchange的记录，有的话才会触发observer的notify
+        [self didChangeValueForKey:@"state"];
+    });
+    
+    
 //    [self zombieTest];
 //    [self zombieTest];
     
 //    [self gcdThreadCooTest];
 //    
 //    [self copyTest];
-//    [self objectMemoryLayoutAlignTest];
+    [self objectMemoryLayoutAlignTest];
 //    
 //    [self addPropertyToCategoryTest];
     
@@ -274,6 +290,20 @@ void exampleA() {
     [self keepWorkThreadAliveAndDoMore];
     
 //    [self autoreleaseCase];
+}
+
+
+- (void)manualKVOCase {
+
+}
+
+
+- (void)setState:(MVState)state {
+    _state = state;
+    [self willChangeValueForKey:@"state"];
+    NSLog(@"hello world");
+    // 调用didchange后会查找下之前有没有willchange的记录，有的话才会触发observer的notify
+    [self didChangeValueForKey:@"state"];
 }
 
 
@@ -344,6 +374,13 @@ void exampleA() {
 }
 
 
+- (void)objSizeInfo {
+    UIView *view = UIView.new;
+    NSLog(@"\nmalloc_size(obj):%@\nsizeof(NSInterger:%@),sizeof(BOOL:%@)", @(malloc_size((__bridge const void *)(view))), @(sizeof(typeof(NSInteger))), @(sizeof(typeof(BOOL))));
+    int size = class_getInstanceSize([Person class]);
+    NSLog(@"sizeof(obj:%d", size);
+}
+
 - (void)objectMemoryLayoutAlignTest {
     Person *obj = [[Person alloc] init];
     
@@ -360,10 +397,8 @@ void exampleA() {
 //    obj.man1=YES;
 
 //    obj.d = 5.f;
-    
-    NSLog(@"1sizeof(obj):%@\nsizeof(NSInterger:%@),sizeof(BOOL:%@)", @(malloc_size((__bridge const void *)(obj))), @(sizeof(typeof(NSInteger))), @(sizeof(typeof(BOOL))));
-    int size = class_getInstanceSize([Person class]);
-    NSLog(@"sizeof(obj:%d", size);
+//    [self objSizeInfo];
+    [self printSizeInfos];
     NSLog(@"asf");
 }
 
@@ -765,22 +800,44 @@ static void YYAutoreleasePoolPop() {
     return view;
 }
 
+//+ (BOOL)accessInstanceVariablesDirectly {
+//    return NO;
+//}
+
+
 
 - (void)test {
     
-    [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+    [self kvcTest];
     
-    HomeViewController *homeVC = HomeViewController.new;
-    [self.navigationController pushViewController:homeVC animated:YES];
-    return;;
+    Class class = object_getClass(self.class);
+//
+//    [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+//
+//    HomeViewController *homeVC = HomeViewController.new;
+//    [self.navigationController pushViewController:homeVC animated:YES];
+//    return;;
     
+//    @autoreleasepool {
+//        __autoreleasing Person *p = [[Person alloc] init];
+//    }
     
-    [self performSelector:@selector(autoreleaseObjInworkThreadCase) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
+//    id p = [[[Person alloc] init] autorelease];
+    self._person = [[Person alloc] init];
+    self._person.block = ^{
+        NSLog(@"p:%@", self);
+    };
+//    NSLog(@"p retainCount:%d", [p retainCount]);
+    
+//    [self performSelector:@selector(autoreleaseObjInworkThreadCase) onThread:self.myWorkThread withObject:nil waitUntilDone:NO];
 //    return;
    
-    Person *p = [Person new];
+//    Person *p = [Person new];
     SecondViewController *vc = SecondViewController.new;
     [self.navigationController pushViewController:vc animated:YES];
+    
+//    Class  _Nullable class = object_getClass(self);
+//    [self printClassAllMethod:class];
 }
 
 - (void)autoreleaseCase {
@@ -851,7 +908,22 @@ static void YYAutoreleasePoolPop() {
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 //    self.myBlock();
-    [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+//    [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
+    [self test];
 
 }
+@end
+
+
+
+@implementation MainViewController (featureA)
+
+- (NSObject *)fa_obj {
+    return self;
+}
+
+- (void)setFa_obj:(NSObject *)fa_obj {
+    
+}
+
 @end

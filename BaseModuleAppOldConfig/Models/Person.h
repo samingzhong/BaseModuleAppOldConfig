@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (nonatomic, assign) double d;
 
+@property (nonatomic, copy) void (^block)(void);
+
 - (void)mainMethod;
 
 + (void)classMethod;

@@ -12,11 +12,14 @@
 
 @interface UnRecognizeSelectorHandler : NSObject
 
+@property (nonatomic, strong) id target;
+@property (nonatomic, assign) SEL sel;
+
 @end
 
 @implementation UnRecognizeSelectorHandler
 
-+ (instancetype)sharedInstance {
++ (UnRecognizeSelectorHandler *)sharedInstance {
     static dispatch_once_t onceToken;
     static UnRecognizeSelectorHandler *instance = nil;
     dispatch_once(&onceToken, ^{
@@ -28,6 +31,27 @@
 + (id)allocWithZone:(struct _NSZone *)zone {
     return [self sharedInstance];
 }
+
+- (id)handleOriginTarget:(id)target selector:(SEL)selector {
+    self.target = target;
+    self.sel = selector;
+    return self;
+}
+
+
++ (BOOL)resolveInstanceMethod:(SEL)sel {
+    
+    class_addMethod(self, sel, imp_implementationWithBlock(^(id sef, SEL sel){
+       NSString *msg = [NSString stringWithFormat:@"向对象：%@发送未能识别的方法：%@", [self sharedInstance].target , NSStringFromSelector([self sharedInstance].sel)];
+#if DEBUG
+//        NSException *e = [NSException exceptionWithName:@"未能识别的方法异常" reason:msg userInfo:@{}];
+//        [e raise];
+#endif
+    }), "v@:");
+    
+    return YES;
+}
+
 
 - (void)handleUnRecognizeSelector:(NSString *)msg {
     NSLog(@"info:%@", msg);
@@ -83,7 +107,7 @@
         
         return NO;
     };
-     block();
+//     block();
     
     return [super resolveInstanceMethod:sel];
 }
@@ -97,12 +121,22 @@ static void function0(id sef, SEL sel, id arg1) {
 }
 
 #pragma mark  - 2.forwardingTargetForSelector
-//- (id)forwardingTargetForSelector:(SEL)aSelector {
-//    return [UnRecognizeSelectorHandler sharedInstance];
-//}
+- (id)forwardingTargetForSelector:(SEL)aSelector {
+//    Method method = class_getInstanceMethod(object_getClass(self), @selector(forwardInvocation:));
+//    Class extractedExpr = class_getSuperclass([self class]);
+//    Method superMethod = class_getInstanceMethod(extractedExpr, @selector(forwardInvocation:));
+//    if (method!=superMethod) {
+//        return nil;
+//    }
+
+    
+    return [[UnRecognizeSelectorHandler sharedInstance] handleOriginTarget:self selector:aSelector];
+}
 
 #pragma mark - 3.
 - (NSMethodSignature *)gac_methodSignatureForSelector:(SEL)aSelector {
+    return [self gac_methodSignatureForSelector:aSelector];
+    
     NSMethodSignature *sign = [self gac_methodSignatureForSelector:aSelector];
     if ([self respondsToSelector:aSelector] || sign) {
         return sign;
@@ -119,6 +153,14 @@ static void function0(id sef, SEL sel, id arg1) {
     [anInvocation setSelector:@selector(handleUnRecognizeSelector:)];
     [anInvocation setArgument:&message atIndex:2];
     [anInvocation invoke];
+}
+
+
+- (void)doesNotRecognizeSelector:(SEL)aSelector {
+//    [super doesNotRecognizeSelector:aSelector];
+    NSString *reason = [NSString stringWithFormat:@"对象:%@未能识别方法:%@", self, NSStringFromSelector(aSelector)];
+    NSException *e = [NSException exceptionWithName:@"未识别的方法" reason:reason userInfo:@{}];
+    [e raise];
 }
 
 @end

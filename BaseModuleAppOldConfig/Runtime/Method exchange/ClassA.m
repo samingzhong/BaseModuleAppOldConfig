@@ -9,6 +9,16 @@
 
 @implementation ClassA
 
++ (ClassA *)classAWithName {
+    ClassA  *obj = ClassA.new;
+    
+    return obj;
+}
+
+- (void)dealloc {
+    
+}
+
 
 - (void)methodA {
     NSLog(@"method A from ClassA:%@", self);

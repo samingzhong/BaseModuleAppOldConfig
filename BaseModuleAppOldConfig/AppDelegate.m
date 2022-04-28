@@ -65,11 +65,12 @@
 //
 //
     
-    [ClassB.class swizzleSelectorA:@selector(methodA) withSelectorB:@selector(methodB)];
+//    [ClassB.class swizzleSelectorA:@selector(methodA) withSelectorB:@selector(methodB)];
     
     
-//    ClassA *a = ClassA.new;
-//    [a methodA];
+    
+    ClassA *a = [ClassA classAWithName];
+    [a methodA];
     
     ClassB *b = ClassB.new;
     [b methodA];
