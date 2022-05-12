@@ -13,6 +13,7 @@ extern uintptr_t _objc_rootRetainCount(id obj);
 extern id _objc_rootRetain(id obj);
 extern void _objc_rootRelease(id obj);
 extern id _objc_rootAutorelease(id obj);
+extern void _objc_autoreleasePoolPrint(void);
 
 - (NSUInteger)rq_retainCount
 {
@@ -40,5 +41,8 @@ extern id _objc_rootAutorelease(id obj);
 }
 
 
++ (void)printAutoreleasepool {
+    _objc_autoreleasePoolPrint();
+}
 
 @end

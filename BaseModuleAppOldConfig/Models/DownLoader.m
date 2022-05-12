@@ -228,7 +228,7 @@
         return 1;
     } else if (totalSize <= 100*1024) {// 100kb
         return 2;
-    } else if (totalSize<=1024*1024) { //<=1Mb
+    } else if (totalSize<=1024*1024) {// <=1Mb
         return 5;
     } else {// <=10Mb
         return 10;

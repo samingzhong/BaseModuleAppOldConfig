@@ -13,10 +13,14 @@
 		08133EAF281A9A9D0079101F /* MainViewController+Load_Initialize.m in Sources */ = {isa = PBXBuildFile; fileRef = 08133EAE281A9A9D0079101F /* MainViewController+Load_Initialize.m */; };
 		08133EB2281A9AE40079101F /* MainViewController+Load_Initialize2.m in Sources */ = {isa = PBXBuildFile; fileRef = 08133EB1281A9AE40079101F /* MainViewController+Load_Initialize2.m */; };
 		082B0D312806B22C00CB0879 /* AutoReleasePoolUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B0D302806B22C00CB0879 /* AutoReleasePoolUtil.m */; };
+		083E54B22828F58D0078E04E /* MyObject_MRC.m in Sources */ = {isa = PBXBuildFile; fileRef = 083E54B12828F58D0078E04E /* MyObject_MRC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		083E54B52828FA9A0078E04E /* MyObject_ARC.m in Sources */ = {isa = PBXBuildFile; fileRef = 083E54B42828FA9A0078E04E /* MyObject_ARC.m */; };
+		083E54B8282B98230078E04E /* GACTriangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 083E54B7282B98230078E04E /* GACTriangeView.m */; };
+		083E54BB282CA7BC0078E04E /* sqliteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 083E54BA282CA7BC0078E04E /* sqliteTest.m */; };
 		0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */; };
 		0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0869E36427E96EFE0067E880 /* WeakProxy.m */; };
 		086B556227D1C08B00E844D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556127D1C08B00E844D0 /* AppDelegate.m */; };
-		086B556827D1C08B00E844D0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556727D1C08B00E844D0 /* MainViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		086B556827D1C08B00E844D0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B556727D1C08B00E844D0 /* MainViewController.m */; };
 		086B556B27D1C08B00E844D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086B556927D1C08B00E844D0 /* Main.storyboard */; };
 		086B556D27D1C08F00E844D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086B556C27D1C08F00E844D0 /* Assets.xcassets */; };
 		086B557027D1C08F00E844D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086B556E27D1C08F00E844D0 /* LaunchScreen.storyboard */; };
@@ -58,6 +62,14 @@
 		08133EB1281A9AE40079101F /* MainViewController+Load_Initialize2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MainViewController+Load_Initialize2.m"; sourceTree = "<group>"; };
 		082B0D2F2806B22C00CB0879 /* AutoReleasePoolUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoReleasePoolUtil.h; sourceTree = "<group>"; };
 		082B0D302806B22C00CB0879 /* AutoReleasePoolUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoReleasePoolUtil.m; sourceTree = "<group>"; };
+		083E54B02828F58D0078E04E /* MyObject_MRC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyObject_MRC.h; sourceTree = "<group>"; };
+		083E54B12828F58D0078E04E /* MyObject_MRC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyObject_MRC.m; sourceTree = "<group>"; };
+		083E54B32828FA9A0078E04E /* MyObject_ARC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyObject_ARC.h; sourceTree = "<group>"; };
+		083E54B42828FA9A0078E04E /* MyObject_ARC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyObject_ARC.m; sourceTree = "<group>"; };
+		083E54B6282B98230078E04E /* GACTriangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACTriangeView.h; sourceTree = "<group>"; };
+		083E54B7282B98230078E04E /* GACTriangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACTriangeView.m; sourceTree = "<group>"; };
+		083E54B9282CA7BC0078E04E /* sqliteTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sqliteTest.h; sourceTree = "<group>"; };
+		083E54BA282CA7BC0078E04E /* sqliteTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sqliteTest.m; sourceTree = "<group>"; };
 		0869E35F27E1B3360067E880 /* NSObject+GACRetainCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GACRetainCount.m"; sourceTree = "<group>"; };
 		0869E36027E1B3360067E880 /* NSObject+GACRetainCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GACRetainCount.h"; sourceTree = "<group>"; };
 		0869E36327E96EFE0067E880 /* WeakProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakProxy.h; sourceTree = "<group>"; };
@@ -199,6 +211,14 @@
 		086B555F27D1C08B00E844D0 /* BaseModuleAppOldConfig */ = {
 			isa = PBXGroup;
 			children = (
+				083E54B6282B98230078E04E /* GACTriangeView.h */,
+				083E54B7282B98230078E04E /* GACTriangeView.m */,
+				083E54B02828F58D0078E04E /* MyObject_MRC.h */,
+				083E54B12828F58D0078E04E /* MyObject_MRC.m */,
+				083E54B32828FA9A0078E04E /* MyObject_ARC.h */,
+				083E54B42828FA9A0078E04E /* MyObject_ARC.m */,
+				083E54B9282CA7BC0078E04E /* sqliteTest.h */,
+				083E54BA282CA7BC0078E04E /* sqliteTest.m */,
 				08133EAC281A9A7C0079101F /* load_initialize */,
 				08133EA8281A7BE60079101F /* KVC */,
 				0A0142E328033B3B00EC5CC8 /* NSZombieObject */,
@@ -485,8 +505,10 @@
 			files = (
 				08A71FBF28001B1800E3EA7A /* AppDelegate+Block.m in Sources */,
 				0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */,
+				083E54B22828F58D0078E04E /* MyObject_MRC.m in Sources */,
 				0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */,
 				08B17BB92803CCF90076402B /* ClassB.m in Sources */,
+				083E54B8282B98230078E04E /* GACTriangeView.m in Sources */,
 				08133EA528193E360079101F /* NSObject+size.m in Sources */,
 				08AA7CA0280FB7A30077D11C /* MsgForwardTestClass.m in Sources */,
 				086B558027D20F4600E844D0 /* SecondViewController.m in Sources */,
@@ -507,6 +529,7 @@
 				0AA506BC2801CC5B00BC084C /* UIView+randomBGColor.m in Sources */,
 				08ED1B3F27D740C5007D6DC6 /* HomeNavigationBar.m in Sources */,
 				08B17BBC2803CD650076402B /* MethodExchange.c in Sources */,
+				083E54B52828FA9A0078E04E /* MyObject_ARC.m in Sources */,
 				08ED1B1627D5EC96007D6DC6 /* TestObject.m in Sources */,
 				08133EA128193ADD0079101F /* MainViewController+BlockTest.m in Sources */,
 				08B17BB62803CC810076402B /* ClassA.m in Sources */,
@@ -514,6 +537,7 @@
 				086B557327D1C08F00E844D0 /* main.m in Sources */,
 				08ED1B7C27D9D0D0007D6DC6 /* Person+A.m in Sources */,
 				08ED1B4327D75B73007D6DC6 /* BarButton.m in Sources */,
+				083E54BB282CA7BC0078E04E /* sqliteTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

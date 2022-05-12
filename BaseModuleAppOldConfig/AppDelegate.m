@@ -20,6 +20,12 @@
 
 #import "NSObject+MethodSwizzle.h"
 
+#import <AFNetworking.h>
+//#import <AFNetworking/WKWebView+AFNetworking.h>
+
+#import "MyObject_MRC.h"
+#import "MyObject_ARC.h"
+
 
 @interface MyPerson : NSObject
 @property (nonatomic, copy) NSString *nickName;
@@ -43,7 +49,7 @@
 
 
 
-@interface AppDelegate ()
+@interface AppDelegate () <NSURLSessionDelegate>
 
 @property (nonatomic, assign) NSObject *obj1;
 
@@ -54,7 +60,120 @@
 @implementation AppDelegate
 
 
+//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+//
+//}
+//
+//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
+//
+//}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
+    
+}
+
+- (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
+    
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    MyObject_MRC *o = [[MyObject_MRC alloc] init];
+    [o startTest];
+    
+    MyObject_ARC *o1 = [[MyObject_ARC alloc] init];
+    [o1 startTest];
+    
+    
+    NSMutableArray *array = [NSMutableArray arrayWithArray:@[@"5",@"2",@"3",@"4",@"1"]];
+    for (NSString *str in array.copy) { // 不要遍历mutableArray，而是应该拷贝一份数据，然后遍历这份。操作原始数组。
+        if ([str isEqual:@"3"]) {
+            [array removeObject:str];
+        }
+    }
+//    [array enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if ([obj isEqualToString:@"3"]) {
+//            [array removeObject:obj];
+//        }
+//    }];
+    
+//    [[AFHTTPSessionManager manager] GET:@"http://localhost:8000/test.txt" parameters:@{@"[name":@"仲夏名👋a👌", @"?age":@31} headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+
+//    NSString *url1 = @"http://localhost:8000/apidata.json";
+////    url1 = @"https://www.baidu.com";
+//    [[AFHTTPSessionManager manager] GET:url1 parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+//
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//
+//    }];
+////
+    NSURL *url = [NSURL URLWithString:@"http://10.10.16.52:8000/huoying.mp4"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    void (^networkRequestBlock)(void) = ^ {
+        NSURL *url = [NSURL URLWithString:@"http://10.10.16.52:8000/apidata.json"];
+//        url = [NSURL URLWithString:@"https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_9266732153990091737%22%7D&n_type=-1&p_from=-1"];
+//        NSURLSessionDataTask *dataTask = [NSURLSession.sharedSession dataTaskWithURL:url];
+        NSURLSession *ss = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                          delegate:self
+                                                     delegateQueue:[NSOperationQueue mainQueue]];
+        ss = NSURLSession.sharedSession;
+        [[ss dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSHTTPURLResponse *httpRes = (NSHTTPURLResponse *)response;
+            if ([httpRes isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSLog(@"httpRes:%@", httpRes);
+                NSString *htmlString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"html:%@", htmlString);
+            }
+            NSLog(@"data:%@", [NSJSONSerialization JSONObjectWithData:data options:0 error:nil]);
+                }] resume];
+//        [[ss dataTaskWithURL:url] resume];
+        
+        //        [[NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//            id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            NSLog(@"obj");
+//                }] resume];
+        
+    };
+    networkRequestBlock();
+    
+//    [[[AFHTTPSessionManager manager] downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+//
+//        } destination:nil completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+//
+//        }] resume];
+    
+//    [[[AFHTTPSessionManager manager] downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+//
+//    } destination:nil completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+//
+//    }] resume];
+//
+    
+    
+//    WKWebView *webView = [WKWebView new];
+//    WKNavigation *nav = [WKNavigation new];
+//    NSProgress *pro;
+//    [webView loadRequest:request navigation:nav progress:&pro success:^NSString * _Nonnull(NSHTTPURLResponse * _Nonnull response, NSString * _Nonnull HTML) {
+//        return @"";
+//    } failure:^(NSError * _Nonnull error) {
+//
+//    }];
+
+//    url = [NSURL URLWithString:@"http://10.10.16.52:8000/apidata.json"];
+//    request = [NSURLRequest requestWithURL:url];
+//
+//    [[[AFHTTPSessionManager manager] dataTaskWithRequest:request uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+//
+//            } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+//
+//            } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+//
+//            }] resume];
+    
     // Override point for customization after application launch.
     
 //    [JPEngine startEngine];

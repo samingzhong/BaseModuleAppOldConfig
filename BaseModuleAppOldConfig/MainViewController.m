@@ -24,6 +24,7 @@
 #import "NSObject+Observe.h"
 #import "NSObject+size.h"
 #import "MainViewController+KVC.h"
+#import "GACTriangeView.h"
 
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
@@ -59,16 +60,202 @@
 
 @interface MVViewB : UIView
 
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation MVViewB
 
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        UITapGestureRecognizer *t = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [self addGestureRecognizer:t];
+        self.timer = [NSTimer timerWithTimeInterval:5 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            NSLog(@"hello .....");
+        }];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+        [self.timer fire];
+    }
+    return self;
+}
+
+
+- (void)handleTap:(UITapGestureRecognizer *)t {
+    
+}
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    return [super pointInside:point withEvent:event];
+}
 
 
 - (CGSize)intrinsicContentSize {
     return CGSizeMake(UIViewNoIntrinsicMetric, 200);
 }
+
+
+
+//- (void)displayLayer:(CALayer *)layer {
+////    [super displayLayer:layer];
+//
+////    UIImage *uiimage = [UIImage imageNamed:@"test"];
+////    layer.contents = (__bridge id _Nullable)(uiimage.CGImage);
+//}
+
+
+- (void)drawRect:(CGRect)rect {
+    return;
+    
+    //1. 注：如果没有获取context时，是什么都不做的（背景无变化）
+    [super drawRect:rect];
+    
+    // 获取上下文
+    CGContextRef context =UIGraphicsGetCurrentContext();
+    CGSize size = rect.size;
+    CGFloat offset = 20;
+    
+    // 画脑袋
+    CGContextSetRGBStrokeColor(context,1,1,1,1.0);
+    CGContextSetLineWidth(context, 1.0);
+    CGContextAddArc(context, size.width / 2, offset + 30, 30, 0, 2*M_PI, 0);
+    CGContextDrawPath(context, kCGPathStroke);
+    
+    // 画眼睛和嘴巴
+    CGContextMoveToPoint(context, size.width / 2 - 23, 40);
+    CGContextAddArcToPoint(context, size.width / 2 - 15, 26, size.width / 2 - 7, 40, 10);
+    CGContextStrokePath(context);
+    
+    CGContextMoveToPoint(context, size.width / 2 + 7, 40);
+    CGContextAddArcToPoint(context, size.width / 2 + 15, 26, size.width / 2 + 23, 40, 10);
+    CGContextStrokePath(context);//绘画路径
+    
+    CGContextMoveToPoint(context, size.width / 2 - 8, 65);
+    CGContextAddArcToPoint(context, size.width / 2, 80, size.width / 2 + 8, 65, 10);
+    CGContextStrokePath(context);//绘画路径
+    
+    // 画鼻子
+    CGPoint nosePoints[3];
+    nosePoints[0] = CGPointMake(size.width / 2, 48);
+    nosePoints[1] = CGPointMake(size.width / 2 - 3, 58);
+    nosePoints[2] = CGPointMake(size.width / 2 + 3, 58);
+    CGContextAddLines(context, nosePoints, 3);
+    CGContextClosePath(context);
+    CGContextDrawPath(context, kCGPathFillStroke);
+    
+    // 画脖子
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextStrokeRect(context, CGRectMake(size.width / 2 - 5, 80, 10, 10));
+    CGContextFillRect(context,CGRectMake(size.width / 2 - 5, 80, 10, 10));
+    
+//    // 画衣裳
+//    CGPoint clothesPoints[4];
+//    clothesPoints[0] = CGPointMake(size.width / 2 - 30, 90);
+//    clothesPoints[1] = CGPointMake(size.width / 2 + 30, 90);
+//    clothesPoints[2] = CGPointMake(size.width / 2 + 100, 200);
+//    clothesPoints[3] = CGPointMake(size.width / 2 - 100, 200);
+//    CGContextAddLines(context, clothesPoints, 4);
+//    CGContextClosePath(context);
+//    CGContextDrawPath(context, kCGPathFillStroke);
+    
+    // 衣裳颜色渐变
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, size.width / 2 - 30, 90);
+    CGPathAddLineToPoint(path, NULL, size.width / 2 + 30, 90);
+    CGPathAddLineToPoint(path, NULL, size.width / 2 + 100, 200);
+    CGPathAddLineToPoint(path, NULL, size.width / 2 - 100, 200);
+    CGPathCloseSubpath(path);
+    [self drawLinearGradient:context path:path startColor:[UIColor cyanColor].CGColor endColor:[UIColor yellowColor].CGColor];
+    CGPathRelease(path);
+    
+    // 画胳膊
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:1 blue:1 alpha:1].CGColor);
+    CGContextMoveToPoint(context, size.width / 2 - 28, 90);
+    CGContextAddArc(context, size.width / 2 - 28, 90, 80,  - M_PI, -1.05 * M_PI, 1);
+    CGContextClosePath(context);
+    CGContextDrawPath(context, kCGPathFill);
+    CGContextMoveToPoint(context, size.width / 2 + 28, 90);
+    CGContextAddArc(context, size.width / 2 + 28, 90, 80,  0, 0.05 * M_PI, 0);
+    CGContextClosePath(context);
+    CGContextDrawPath(context, kCGPathFill);
+    
+    // 画左手
+    CGPoint aPoints[2];
+    aPoints[0] =CGPointMake(size.width / 2 - 30 - 81, 90);
+    aPoints[1] =CGPointMake(size.width / 2 - 30 - 86, 90);
+    CGContextAddLines(context, aPoints, 2);
+    aPoints[0] =CGPointMake(size.width / 2 - 30 - 80, 93);
+    aPoints[1] =CGPointMake(size.width / 2 - 30 - 85, 93);
+    CGContextAddLines(context, aPoints, 2);
+    CGContextDrawPath(context, kCGPathStroke);
+    // 画右手
+    aPoints[0] =CGPointMake(size.width / 2 + 30 + 81, 90);
+    aPoints[1] =CGPointMake(size.width / 2 + 30 + 86, 90);
+    CGContextAddLines(context, aPoints, 2);
+    aPoints[0] =CGPointMake(size.width / 2 + 30 + 80, 93);
+    aPoints[1] =CGPointMake(size.width / 2 + 30 + 85, 93);
+    CGContextAddLines(context, aPoints, 2);
+    CGContextDrawPath(context, kCGPathStroke);
+    
+//    // 画虚线
+//    aPoints[0] =CGPointMake(size.width / 2 + 30 + 81, 90);
+//    aPoints[1] =CGPointMake(size.width / 2 + 30 + 86, 90);
+//    CGContextAddLines(context, aPoints, 2);
+//    aPoints[0] =CGPointMake(size.width / 2 + 30 + 80, 93);
+//    aPoints[1] =CGPointMake(size.width / 2 + 30 + 85, 93);
+//    CGContextAddLines(context, aPoints, 2);
+//    CGFloat arr[] = {1, 1};
+//    CGContextSetLineDash(context, 0, arr, 2);
+//    CGContextDrawPath(context, kCGPathStroke);
+    
+    // 画双脚
+    CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
+    CGContextAddEllipseInRect(context, CGRectMake(size.width / 2 - 30, 210, 20, 15));
+    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);
+    CGContextAddEllipseInRect(context, CGRectMake(size.width / 2 + 10, 210, 20, 15));
+    CGContextDrawPath(context, kCGPathFillStroke);
+    
+    // 绘制图片
+    UIImage *image = [UIImage imageNamed:@"img_watch"];
+    [image drawInRect:CGRectMake(60, 270, 100, 120)];
+    //[image drawAtPoint:CGPointMake(100, 340)];
+    //CGContextDrawImage(context, CGRectMake(100, 340, 20, 20), image.CGImage);
+    
+    // 绘制文字
+    UIFont *font = [UIFont boldSystemFontOfSize:20.0];
+    NSDictionary *attriDict = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor redColor]};
+    [@"绘制文字" drawInRect:CGRectMake(180, 270, 150, 30) withAttributes:attriDict];
+}
+
+- (void)drawLinearGradient:(CGContextRef)context
+                      path:(CGPathRef)path
+                startColor:(CGColorRef)startColor
+                  endColor:(CGColorRef)endColor {
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGFloat locations[] = { 0.0, 1.0 };
+    NSArray *colors = @[(__bridge id) startColor, (__bridge id) endColor];
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef) colors, locations);
+    CGRect pathRect = CGPathGetBoundingBox(path);
+    //具体方向可根据需求修改
+    CGPoint startPoint = CGPointMake(CGRectGetMidX(pathRect), CGRectGetMinY(pathRect));
+    CGPoint endPoint = CGPointMake(CGRectGetMidX(pathRect), CGRectGetMaxY(pathRect));
+    CGContextSaveGState(context);
+    CGContextAddPath(context, path);
+    CGContextClip(context);
+    CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
+    CGContextRestoreGState(context);
+    CGGradientRelease(gradient);
+    CGColorSpaceRelease(colorSpace);
+}
+
 
 @end
 
@@ -127,7 +314,7 @@ static int s_i = 1;
 void exampleA() {
   char a = 'A';
   ^{
-    printf("%cn", a);
+//    printf("%cn", a);
   }();
 }
 
@@ -191,23 +378,29 @@ void exampleA() {
         void (^block0)(void) = ^{
             NSLog(@"hello:%d", i_i);
         };
-        self.myBlock = ^{
+        _myBlock = ^{
             NSLog(@"hello:%d", i_i);
         };
         //    Block_copy(self.myBlock);
         
+        // arc 下 block会被自动拷贝到堆区。
         int i = 0;
         void (^block)(void) = ^{
             NSLog(@"i:%d", i);
         };
         NSLog(@"block:%@", block);
         
-        
+        // block位于堆区
+        id tmp = self;
         void (^block1)(void) = ^{
-            NSLog(@"self:%@", self);
+            NSLog(@"self:%@", tmp);
         };
+        
+//        block1 = Block_copy(block1);
         NSLog(@"block:%@", block1);
         
+        
+        // block位于data段，全局
         void (^block2)(void) = ^{
             //        s_i = 2;
         };
@@ -217,16 +410,23 @@ void exampleA() {
         int j = 0;
         self.j = j;
     };
-//    blockTest();
+    blockTest();
     
     
+    
+    void (^weakUsageBlock)(void) = ^ {
+        NSObject *s_o = NSObject.new;
+        id __weak w_o = s_o;
+        NSLog(@"w_o retainCount:%z", w_o  );
+    };
+    weakUsageBlock();
     
     
     
     self.myWorkQueue = dispatch_queue_create("my.work.queue", DISPATCH_QUEUE_CONCURRENT);
     
 //    [DownLoader downloadWithUrl:@"https://vd3.bdstatic.com/mda-ncdf5p17j4ztsdaw/sc/cae_h264_delogo/1647263253838817803/mda-ncdf5p17j4ztsdaw.mp4?v_from_s=hkapp-haokan-hnb&auth_key=1647327438-0-0-5e27273cca0976df226d33c8f764990c&bcevod_channel=searchbox_feed&cd=0&pd=1&pt=3&logid=1637974093&vid=15318298559196487317&abtest=100815_2-17451_1&klogid=1637974093" block:nil];
-//    [DownLoader downloadWithUrl:@"https://t7.baidu.com/it/u=2295973985,242574375&fm=193&f=GIF" block:nil];
+//    [DownLoader downloadWithUrl:@"http://10.10.16.52:8000/huoying.mp4" block:nil];
     
      
     
@@ -485,6 +685,7 @@ void exampleA() {
 
 #pragma mark - runloop observer
 static CFAbsoluteTime sTime;
+static double atime;
 static void YYRunLoopAutoreleasePoolObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info) {
     switch (activity) {
         case kCFRunLoopEntry: {
@@ -494,10 +695,11 @@ static void YYRunLoopAutoreleasePoolObserverCallBack(CFRunLoopObserverRef observ
         case kCFRunLoopAfterWaiting: {
             NSLog(@"runloop醒来了");
             sTime = CFAbsoluteTimeGetCurrent();
+            atime =  CFAbsoluteTimeGetCurrent();
         } break;
         case kCFRunLoopBeforeWaiting: {//进入休眠前，释放池子里的对象、并且重新创建一个池子。
-            CFTimeInterval intervalTime = CFAbsoluteTimeGetCurrent()-sTime;
-            NSLog(@"runloop即将休眠:%f", intervalTime);
+            CFTimeInterval intervalTime = (CFAbsoluteTimeGetCurrent()-sTime);
+            NSLog(@"runloop即将休眠:%f, 动态帧率:%f", intervalTime, 1/intervalTime);
 
             YYAutoreleasePoolPop();
             YYAutoreleasePoolPush();
@@ -774,8 +976,8 @@ static void YYAutoreleasePoolPop() {
     {
         view = MVViewB.new;
         view.backgroundColor = UIColor.orangeColor;
-        UIView *leftView = UIView.new;
-        leftView.backgroundColor = UIColor.grayColor;
+        UIView *leftView = [[GACTriangeView alloc] initWithColor:UIColor.whiteColor style:triangleViewIsoscelesBottom];
+//        leftView.backgroundColor = UIColor.grayColor;
         [view addSubview:leftView];
         UIView *rightView = UIView.new;
         rightView.backgroundColor = UIColor.redColor;
@@ -784,17 +986,35 @@ static void YYAutoreleasePoolPop() {
         [leftView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(2);
             make.size.mas_equalTo(CGSizeMake(100, 100));
-            make.center.mas_equalTo(0);
+            make.left.mas_equalTo(10);
             make.bottom.mas_equalTo(-2);
         }];
+        
+//
+        
+        
         
         UIButton *btn = UIButton.new;
         [btn setTitle:@"push to b" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-        [leftView addSubview:btn];
+        [view addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.center.mas_equalTo(0);
         }];
+        
+        
+        void (^rotate)(UIView *view) = ^(UIView *view) {
+            NSTimer *timer = [NSTimer timerWithTimeInterval:1.0/30 repeats:YES block:^(NSTimer * _Nonnull timer) {
+                static CGFloat angle = 0;
+                CGAffineTransform transform = CGAffineTransformIdentity;
+                transform = CGAffineTransformTranslate(transform, 0, 0);
+                angle+=M_PI/30;
+                view.transform = CGAffineTransformRotate(transform, angle);
+            }];
+            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        };
+        rotate(btn);
+        
     }
     
     return view;

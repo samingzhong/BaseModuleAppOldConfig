@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)rq_autorelease;
 
++ (void)printAutoreleasepool;
 
 @end
 
