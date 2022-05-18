@@ -138,7 +138,7 @@
 //                }] resume];
         
     };
-    networkRequestBlock();
+//    networkRequestBlock();
     
 //    [[[AFHTTPSessionManager manager] downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
 //

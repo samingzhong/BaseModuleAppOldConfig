@@ -6,12 +6,15 @@
 //
 
 #import "MyObject_ARC.h"
+#import <objc/runtime.h>
 
 #import "objc-retainCount/NSObject+GACRetainCount.h"
 
-@interface MyObject_ARC ()
+@interface MyObject_ARC (){
+//    NSObject * _objForDynamic;
+}
 
-//@property (nonatomic, strong) NSObject *objForDynamic;
+@property (nonatomic, strong) NSObject *objForDynamic;
 
 @end
 
@@ -19,18 +22,40 @@
 @implementation MyObject_ARC
 
 //@dynamic objForDynamic;
+@synthesize objForDynamic = _objForDynamic;
 
 
-//- (void)setObjForDynamic:(NSObject *)objForDynamic {
+- (void)setObjForDynamic:(NSObject *)objForDynamic {
+
+}
 //
-//}
-//
-//- (NSObject *)objForDynamic {
-//    return _objForDynamic;
-//}
+- (NSObject *)objForDynamic {
+    return _objForDynamic;
+}
 
 
 - (void)startTest {
+    
+    #pragma mark isa
+//    所有元类对象的 isa 指针都指向跟元类；
+//    根元类（Meta_NSObject）的 superClass 指针指向跟类对象（NSObject）；
+//    跟类对象（NSObject）的 superClass 指向为nil；
+//
+//    作者：康小曹
+//    链接：https://www.jianshu.com/p/4bc94bb6d7c4
+//    来源：简书
+//    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    void (^isaTest)(void) = ^ {
+        id NSObjectClass = NSObject.class;
+        id NSObject_MetaClass = object_getClass(NSObject.class);
+        id MyObject_MetaClass = object_getClass(self.class);
+        id MyObject_MetaClass_MetaClass = object_getClass(MyObject_MetaClass);
+        id NSObject_MetaClass_superClass = class_getSuperclass(NSObject_MetaClass);
+        id NSObject_superClass = class_getSuperclass(NSObjectClass);
+        NSLog(@"");
+    };
+    isaTest();
+    
     
     #pragma mark dynamic
     self.objForDynamic = [NSObject new];
@@ -43,23 +68,42 @@
 //        [ar_o autorelease];
 //        [ary retain];
         NSString *str = [NSString stringWithFormat:@"12312312test:%@", @10];
+        NSString *str2 = [NSString stringWithFormat:@"12312%@", @10];
+
 //        _objc_autoreleasePoolPrint();
+        
 //
         
+        __weak id w_p = nil;
+        @autoreleasepool {
+            NSMutableArray *mArray = [[NSMutableArray alloc] init];
+            w_p = mArray;
+//            [w_p printRetainCount];
+                        [w_p printRetainCount];
+                        [mArray printRetainCount];
+            [NSObject printAutoreleasepool];
+
+            
+            MyObject_ARC *o = [[MyObject_ARC alloc] init]; // mrc下 alloc 返回的对象 retainCount为1，不会因为o变量超出作用域而向o发送release消息，但ARC会。
+           __weak id w_o = o;
+           // 对__weak 变量的使用并不会向对象发送autorelease消息
+           NSLog(@"w_o:%@", w_o);
+           NSLog(@"w_o:%@", w_o);
+           NSLog(@"w_o:%@", w_o);
+           NSLog(@"w_o:%@", w_o);
+           
+   //        [o release];
+           [ar_o printRetainCount];
+           [str printRetainCount];
+           [str2 printRetainCount];
+           [o printRetainCount];
+           [NSObject printAutoreleasepool];
+        }
+        NSLog(@"before");
+        [w_p printRetainCount];
+        NSLog(@"hello:w_p:%p", w_p);
         
-        __autoreleasing MyObject_ARC *o = [[MyObject_ARC alloc] init]; // mrc下 alloc 返回的对象 retainCount为1，不会因为o变量超出作用域而向o发送release消息，但ARC会。
-        __weak id w_o = o;
-        // 对__weak 变量的使用并不会向对象发送autorelease消息
-        NSLog(@"w_o:%@", w_o);
-        NSLog(@"w_o:%@", w_o);
-        NSLog(@"w_o:%@", w_o);
-        NSLog(@"w_o:%@", w_o);
         
-//        [o release];
-        [ar_o printRetainCount];
-        [str printRetainCount];
-        [o printRetainCount];
-        [NSObject printAutoreleasepool];
     };
     reatainCountTest();
     

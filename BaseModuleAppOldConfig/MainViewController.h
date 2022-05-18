@@ -25,3 +25,7 @@
 
 @end
 
+@interface MVViewB : UIView
+
+@end
+

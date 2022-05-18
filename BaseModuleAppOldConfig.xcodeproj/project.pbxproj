@@ -27,6 +27,7 @@
 		086B557327D1C08F00E844D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557227D1C08F00E844D0 /* main.m */; };
 		086B557C27D1E7D200E844D0 /* UIButton+Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */; };
 		086B558027D20F4600E844D0 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086B557F27D20F4600E844D0 /* SecondViewController.m */; };
+		0896F80D282E61F9005D1BF5 /* ChinesePerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 0896F80C282E61F9005D1BF5 /* ChinesePerson.m */; };
 		08A71FA827FED3A300E3EA7A /* NSObject+Observe.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A71FA727FED3A300E3EA7A /* NSObject+Observe.m */; };
 		08A71FBF28001B1800E3EA7A /* AppDelegate+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A71FBE28001B1800E3EA7A /* AppDelegate+Block.m */; };
 		08AA7CA0280FB7A30077D11C /* MsgForwardTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA7C9F280FB7A30077D11C /* MsgForwardTestClass.m */; };
@@ -89,6 +90,8 @@
 		086B557B27D1E7D200E844D0 /* UIButton+Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Enlarge.m"; sourceTree = "<group>"; };
 		086B557E27D20F4600E844D0 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		086B557F27D20F4600E844D0 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		0896F80B282E61F9005D1BF5 /* ChinesePerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChinesePerson.h; sourceTree = "<group>"; };
+		0896F80C282E61F9005D1BF5 /* ChinesePerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChinesePerson.m; sourceTree = "<group>"; };
 		08A71FA627FED3A300E3EA7A /* NSObject+Observe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Observe.h"; sourceTree = "<group>"; };
 		08A71FA727FED3A300E3EA7A /* NSObject+Observe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Observe.m"; sourceTree = "<group>"; };
 		08A71FBD28001B1800E3EA7A /* AppDelegate+Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Block.h"; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 			children = (
 				08ED1B4527D89634007D6DC6 /* Person.h */,
 				08ED1B4627D89634007D6DC6 /* Person.m */,
+				0896F80B282E61F9005D1BF5 /* ChinesePerson.h */,
+				0896F80C282E61F9005D1BF5 /* ChinesePerson.m */,
 				08ED1B7D27D9D38B007D6DC6 /* Person+PersonExtension.h */,
 				08ED1B7A27D9D0D0007D6DC6 /* Person+A.h */,
 				08ED1B7B27D9D0D0007D6DC6 /* Person+A.m */,
@@ -507,6 +512,7 @@
 				0869E36527E96EFE0067E880 /* WeakProxy.m in Sources */,
 				083E54B22828F58D0078E04E /* MyObject_MRC.m in Sources */,
 				0869E36127E1B3360067E880 /* NSObject+GACRetainCount.m in Sources */,
+				0896F80D282E61F9005D1BF5 /* ChinesePerson.m in Sources */,
 				08B17BB92803CCF90076402B /* ClassB.m in Sources */,
 				083E54B8282B98230078E04E /* GACTriangeView.m in Sources */,
 				08133EA528193E360079101F /* NSObject+size.m in Sources */,

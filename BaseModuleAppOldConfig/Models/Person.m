@@ -9,6 +9,8 @@
 
 @interface Person () <NSMutableCopying>
 
+@property (nonatomic, copy) NSString *innerString;
+
 @end
 
 @implementation Person
@@ -53,10 +55,16 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) id obj;
 
+
+//@property (nonatomic, copy) NSString *innerString;
+
 @end
 
 
 @implementation XXPerson
+
+@dynamic age;
+@dynamic innerString;
 
 - (void)doSomeLog {
     Class selfClass = [self class];

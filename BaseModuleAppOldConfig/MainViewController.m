@@ -15,6 +15,9 @@
 #import <malloc/malloc.h>
 #import <objc/runtime.h>
 
+#import "objc-retainCount/NSObject+GACRetainCount.h"
+
+
 #import "Person+A.h"
 
 #import "DownLoader.h"
@@ -25,6 +28,8 @@
 #import "NSObject+size.h"
 #import "MainViewController+KVC.h"
 #import "GACTriangeView.h"
+
+#import "ChinesePerson.h"
 
 @interface UICollectionViewFlowLayoutA : UICollectionViewFlowLayout
 
@@ -58,7 +63,7 @@
 @end
 
 
-@interface MVViewB : UIView
+@interface MVViewB ()
 
 @property (nonatomic, strong) NSTimer *timer;
 
@@ -75,8 +80,7 @@
         self.timer = [NSTimer timerWithTimeInterval:5 repeats:YES block:^(NSTimer * _Nonnull timer) {
             NSLog(@"hello .....");
         }];
-        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-        [self.timer fire];
+//        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     }
     return self;
 }
@@ -109,6 +113,10 @@
 ////    layer.contents = (__bridge id _Nullable)(uiimage.CGImage);
 //}
 
+
+- (void)dealloc {
+    
+}
 
 - (void)drawRect:(CGRect)rect {
     return;
@@ -328,6 +336,10 @@ void exampleA() {
 
 
 - (void)viewDidLoad {
+    NSLog(@"main runloop:%@", [NSRunLoop currentRunLoop]);
+    
+    ChinesePerson *p = ChinesePerson.new;
+    
     [super viewDidLoad];
     exampleA();
     
@@ -699,7 +711,7 @@ static void YYRunLoopAutoreleasePoolObserverCallBack(CFRunLoopObserverRef observ
         } break;
         case kCFRunLoopBeforeWaiting: {//进入休眠前，释放池子里的对象、并且重新创建一个池子。
             CFTimeInterval intervalTime = (CFAbsoluteTimeGetCurrent()-sTime);
-            NSLog(@"runloop即将休眠:%f, 动态帧率:%f", intervalTime, 1/intervalTime);
+//            NSLog(@"runloop即将休眠:%f, 动态帧率:%f", intervalTime, 1/intervalTime);
 
             YYAutoreleasePoolPop();
             YYAutoreleasePoolPush();
@@ -1013,7 +1025,7 @@ static void YYAutoreleasePoolPop() {
             }];
             [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
         };
-        rotate(btn);
+//        rotate(btn);
         
     }
     
@@ -1129,7 +1141,43 @@ static void YYAutoreleasePoolPop() {
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 //    self.myBlock();
 //    [self performSelector:@selector(sayHello) onThread:self.thread withObject:nil waitUntilDone:NO];
-    [self test];
+//    [self test];
+    
+    [self.class printAutoreleasepool];
+    void (^autureleaseTest)(void) = ^ {
+        for (int i=0; i<3; i++) {
+            __autoreleasing MVViewB *view = [[MVViewB alloc] init];
+        }
+    };
+    autureleaseTest();
+    [self.class printAutoreleasepool];
+    NSLog(@"hello");
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        @autoreleasepool {
+            for (int i=0; i<2000; i++) {
+                __autoreleasing MVViewB *view = [[MVViewB alloc] init];
+            }
+//            NSArray *array = [NSArray arrayWithObject:@""];
+//            NSArray *array1 = [NSMutableArray arrayWithCapacity:1];
+//
+//            [self.class printAutoreleasepool];
+//            NSLog(@"hello");
+//
+//            @autoreleasepool {
+//                NSArray *array = [NSMutableArray arrayWithCapacity:1];
+//                [self.class printAutoreleasepool];
+//                NSLog(@"hello");
+//
+//            }
+            [self.class printAutoreleasepool];
+            NSLog(@"hello");
+//        }
+        [self.class printAutoreleasepool];
+        NSLog(@"hello");
+        
+        
+    });
 
 }
 @end

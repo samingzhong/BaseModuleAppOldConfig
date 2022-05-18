@@ -6,6 +6,7 @@
 //
 
 #import "NSObject+GACRetainCount.h"
+#import <objc/runtime.h>
 
 @implementation NSObject (GACRetainCount)
 
@@ -22,7 +23,7 @@ extern void _objc_autoreleasePoolPrint(void);
 
 - (void)printRetainCount
 {
-    NSLog(@"obj:<%@> retainCount:%lu", self, [self rq_retainCount]);
+    NSLog(@"obj:<%p, %@, isa:%@> retainCount:%lu", self, self, object_getClass(self), [self rq_retainCount]);
 }
 
 - (id)rq_retain
